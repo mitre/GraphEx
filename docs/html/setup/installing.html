@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link rel="stylesheet" href="../graphexStyle.css">
+</head>
+<body>
+
+<h1 id="installing-graphex">Installing Graphex</h1>
+<p>Graphex is installed via package through Python&#39;s pip package manager (using the CLI (command line interface)). This package can be either downloaded or built from source via our git repository.</p><h2 id="prerequisites">Prerequisites</h2>
+<p>The following applications are required to run Graphex:</p><ul>
+<li>Python (version 3.10 or greater) and pip (the python package manager)</li>
+</ul>
+<p>The following applications are required if building from source:</p><ul>
+<li>git</li>
+<li>node (v18.15.0 or greater) and npm (v9.5.0 or greater)</li>
+<li>make</li>
+</ul>
+<p>It is also recommended that you build the application in a python virtual environment (venv). This helps ensure that different python packages (especially ones that may be critical to your system) don&#39;t have conflicts between each other.</p><h2 id="installing-a-released-graphex-version">Installing a Released Graphex Version</h2>
+<p>GraphEx may be available via pip. If available, then you can simply install the latest graphex package via:</p><pre><code>python3 -m pip install --upgrade pip
+python3 -m pip install graphex
+</code></pre>
+<p>Graphex should now be installed on your system. You can check by running:</p><pre><code>python3 -m pip list
+</code></pre>
+<p>You should see Graphex in the list of packages installed by pip. Unix systems can grep the result for Graphex.</p><p>You can install any released Graphex plugin that is available in pip in this same way. For example, the esxi_utils plugin could be installed with (if available):</p><pre><code>python3 -m pip install graphex_esxi_utils
+</code></pre>
+<p><a href="#installing-plugins">Click here for instructions on installing plugins that aren&#39;t located in the pip feed</a>.</p><p>At this point, &#39;vanilla&#39; Graphex is installed. <a href="running.html">Click here</a> to navigate to instructions on how to run Graphex.</p><h2 id="building-from-source">Building from Source</h2>
+<p>Create a python virtual environment (venv) now if you intend to use one.</p><p>Ensure you have the latest version of pip for python running the following command:</p><pre><code>python3 -m pip install --upgrade pip
+</code></pre>
+<p>You can download this repository using git:</p><pre><code>git clone https://graphex_repo_location
+</code></pre>
+<p>Navigate into the folder retrieved from the server. Install the python package dependencies for Graphex by running the following command:</p><pre><code>python3 setup.py install
+</code></pre>
+<p>Then build and install the program with make:</p><pre><code>make all
+</code></pre>
+<p>Graphex should now be installed on your system. You can check by running:</p><pre><code>python3 -m pip list
+</code></pre>
+<p>You should see Graphex in the list of packages installed by pip. Unix systems can grep the result for Graphex.</p><p>At this point, &#39;vanilla&#39; Graphex is installed. <a href="running.html">Click here</a> to navigate to instructions on how to run Graphex or <a href="#installing-plugins">continue to the next section for instructions on installing plugins</a>.</p><h3 id="installing-plugins">Installing Plugins</h3>
+<p>Plugins for Graphex are installed as standalone python packages. Each plugin will have its own pip (python package) dependencies that will need to be installed before the package itself can be installed. The process to install a plugin is functionally identical to the process you just followed to install Graphex.</p><p>As an example, there is a ESXi Utilities package available for graphex.</p><p>You would clone the repository (in the same way you cloned the Graphex application):</p><pre><code>git clone https://utils_repo_location
+</code></pre>
+<p>Navigate into the folder retrieved from the server. Install the python package dependencies for the plugin by running the following command (it may error):</p><pre><code>python3 setup.py install
+</code></pre>
+<p>If you receive an error after running this command, it is likely because you are missing a dependency for the package. This particular plugin requires the &#39;esxi_utils&#39; python package (the library containing the functions to interface with ESXi). You would install it in the same manner as has been described here.</p><p>When you have resolved all your dependency installation errors, you can install the package itself:</p><pre><code>make all
+</code></pre>
+<p>The plugin for Graphex should now be installed on your system. You can check by running:</p><pre><code>python3 -m pip list
+</code></pre>
+<p>You should see both Graphex and the plugin&#39;s package name in the list of packages installed by pip. Unix systems can grep the results.</p><p>When you are done installing all your plugins, <a href="running.html">click here</a> to navigate to instructions on how to run Graphex.</p><h2 id="updating-graphex">Updating Graphex</h2>
+<p>Graphex and its plugins are python (pip) packages. They can be upgraded in the same manner as any other python package.</p><h3 id="updating-install-from-a-pip-feed">Updating Install from a Pip Feed</h3>
+<p>Any packages installed from the feed can be upgraded through pip:</p><pre><code>python3 -m pip install --upgrade graphex
+# or, plugin example
+python3 -m pip install --upgrade plugin_name
+</code></pre>
+<h3 id="updating-built-from-source">Updating Built from Source</h3>
+<p>Any packages installed from a repository have to be re-built. First you will &#39;pull down&#39; changes from the remote repository and then you will perform a fresh build and install of the package.</p><p>Navigate to the directory/folder of the package you want to upgrade (i.e. Graphex itself or any of its plugins)</p><p>First, figure out what &#39;git branch&#39; you are currently on:</p><pre><code>git branch --show-current
+</code></pre>
+<p>Typically it is called &#39;main&#39;, &#39;master&#39;, or &#39;release/v#&#39;. If it isn&#39;t one of these, you are probably on a branch for development (one that may not be complete or has untested changes). Confirm that is what you want before continuing.</p><p>If you have modified the files in this branch in any way, it may interfere with the following steps. This document is going to assume you have not changed any of the files in the folder (if you have changed the files on accident, you can always clone the repo again in a new folder to avoid conflicting with the changes in the current folder).</p><p>You can check for changes to the current git directory by running:</p><pre><code>git status -s
+</code></pre>
+<p>An unchanged directory/folder will show no output after this command.</p><p>Now &#39;pull down&#39; the latest changes (replacing name_of_branch with the one you discovered earlier):</p><pre><code>git pull origin name_of_branch
+</code></pre>
+<p>If you see the message &#39;Already up to date.&#39; then there are no new updates to install. You have the latest version of the package and don&#39;t need to rebuild and reinstall.</p><p>Otherwise, rebuild and reinstall the package:</p><pre><code>python3 setup.py install
+make all
+</code></pre>
+<p>You can verify the version changed by running:</p><pre><code>pip list
+</code></pre>
+<p>And checking that the version number changed from what it was before.</p><p><a href="../index.html">Return to Main Page</a></p>
+</body>
+</html>

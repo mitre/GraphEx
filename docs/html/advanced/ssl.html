@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link rel="stylesheet" href="../graphexStyle.css">
+</head>
+<body>
+
+<h1 id="ssl-certificates">SSL Certificates</h1>
+<p>When serving GraphEx, the connection between the client and the server is secured using the HTTPS protocol. This protocol requires certificate use to work with GraphEx. By default, GraphEx will <strong>automatically create</strong> a new self-signed certificate using pyopenssl if you don&#39;t provide the path to one to use. This certificate will be <em>reused</em> as long as you are serving from the <em>same directory</em> each time. Should your certificate change (e.g. you serve from a new directory and aren&#39;t providing a static path to the certificates you want to use), the client browser will warn you that your connection &quot;may be unsafe&quot; (it isn&#39;t, your browser just doesn&#39;t recognize self-signed certificates).</p><p>This page describes information on how to provide certificates to GraphEx and one example of how you might go about manually generating (simple, self-signed) reusable certificates.</p><h2 id="providing-certificates">Providing Certificates</h2>
+<p>You can tell the GraphEx where your certificate files are with the &quot;-s&quot; flag:</p><pre><code>python3 -m graphex serve -s /path/to/certificate/directory
+</code></pre>
+<p>Or by providing the key+value pair in your configuration file:</p><pre><code># YML example
+ssl_certificates_path: &quot;/path/to/certificate/directory&quot;
+</code></pre>
+<p>Certificates for SSL must be provided to that directory with the names: cert.pem and key.pem </p><p>These filenames are the only ones recognized by GraphEx. If your certificates are named anything else, GraphEx will not be able to find them in the provided directory.</p><h2 id="generating-self-signed-certificates-manual-way">Generating Self-Signed Certificates (Manual Way)</h2>
+<p>On Unix systems one way of generating self-signed certificates is to use the script included in the Graphex directory. Under the sub-directory &quot;ssl_certificates&quot;, run the script:</p><pre><code>./generate_certs.sh
+</code></pre>
+<p>The command &#39;openssl&#39; must be available on the system. Use your system package manager to install it. The generated certificates do not have to remain in this directory, feel free to move them to an easier path to provide to GraphEx.</p><p><a href="../index.html">Return to Main Page</a></p>
+</body>
+</html>

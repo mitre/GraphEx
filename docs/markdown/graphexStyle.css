@@ -1,0 +1,91 @@
+* {
+    box-sizing: border-box;
+    font-family: 'Roboto', Arial, Helvetica, sans-serif;
+   
+}
+
+html {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    background-color: rgb(14, 19, 21);
+    font-size: 16px;
+}
+
+body {
+    background-color: rgb(22, 29, 33);
+    color: rgb(221, 217, 211);
+    width: 90%;
+    padding: 32px;
+    border-radius: 12px;
+}
+
+p {
+    margin: 6px 0px;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    color: rgb(138, 228, 255);
+    margin: 12px 0px;
+    padding: 4px 0px;
+    width: 100%;
+    border-bottom: 1px solid rgba(138, 228, 255, 0.3);
+}
+
+h1:not(:first-child), h2:not(:first-child), h3:not(:first-child), h4:not(:first-child), h5:not(:first-child), h6:not(:first-child) {
+    margin-top: 32px;
+}
+
+h1 {
+    font-size: 1.6rem;
+}
+
+
+h2 {
+    font-size: 1.2rem;
+}
+
+h3 {
+    font-size: 1.1rem;
+}
+
+h4, h5, h6 {
+    font-size: 1.0rem;
+}
+
+a {
+    color: rgb(152, 216, 255);
+}
+
+a:hover {
+    color: rgb(64, 183, 255);
+}
+
+code {
+    display: block;
+    border: 1px solid rgb(32, 42, 46);
+    background-color: rgb(10, 15, 17);
+    border-radius: 5px;
+    padding: 8px 16px;
+    overflow: auto;
+    font-family: monospace;
+}
+
+img {
+    border: 1px solid rgb(61, 79, 88);
+    border-radius: 4px;
+    padding: 5px;
+    margin: 8px 0px;
+}
+
+.warning {
+    color: yellow;
+}
+
+.note {
+    color: aqua;
+}
+
+.important {
+    color: red;
+}

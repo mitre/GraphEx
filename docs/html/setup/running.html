@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link rel="stylesheet" href="../graphexStyle.css">
+</head>
+<body>
+
+<h1 id="running-graphex">Running Graphex</h1>
+<p>Graphex is run via the command line interface (CLI) as a python module. A built in help menu is available to assist you in providing arguments to the module.</p><p>The help menu can be reached by running:</p><pre><code>python3 -m graphex -h
+</code></pre>
+<p>You will notice that there are two primary options/modes: serve and run. The serve option creates a webserver that can be connected to via a browser and provides you with a User Interface (UI) in which to plot (and run) graphs with. The run option lets you run a previously created graph without a UI.</p><p>More comprehensive help for each option can be found by chaining the help flag, e.g.:</p><pre><code>python3 -m graphex serve -h
+python3 -m graphex run -h
+</code></pre>
+<h2 id="common-arguments">Common Arguments</h2>
+<p>There are some arguments that can be provided to both the &#39;serve&#39; and &#39;run&#39; options:</p><ul>
+<li>&#39;-h&#39; or &#39;--help&#39; to retrieve a list of all arguments/flags you can provide to your current option (serve or run)</li>
+<li>&#39;-l&#39; or &#39;--plugins&#39; to provide a comma-separated list of plugins to load</li>
+<li>&#39;-c&#39; or &#39;--config&#39; to provide a configuration file (discussed further <a href="../advanced/config.html">in the document on configuration files</a>)</li>
+<li>&#39;-r&#39; or &#39;--root&#39; to tell Graphex to use a different directory for file storage (default is the current directory)</li>
+<li>&#39;-e&#39; or &#39;--errors&#39; to increase the verbosity of error messages (enabling a stack trace in python)</li>
+<li>&#39;-inv&#39; or &#39;--inventory_path&#39; to provide the directory containing inventory files to GraphEx</li>
+</ul>
+<p>Provide the arguments following either the &#39;serve&#39; or &#39;run&#39; option. For example, if I wanted to provide two plugins to Graphex:</p><pre><code>python3 -m graphex serve --plugins graphex_esxi_utils, some_other_graphex_plugin
+</code></pre>
+<p><span class='warning'>WARNING: </span> External plugin code and documentation can&#39;t be verified to be safe to use by GraphEx itself. Verify that the plugin you are installing is safe before providing it as an argument to GraphEx.</p><h2 id="serve">Serve</h2>
+<p>The &#39;serve&#39; option is the primary way you will interface with Graphex. This option will create a web server on the machine it is run from. This server can be reached from any other computer that can access the computer that the server is running on.</p><p>Any computer with a connection can then act as a client to the server. The client receives a UI that lets the user plot nodes on graphs. As the user, you can save plotted graphs to the server or download them to your local machine. Any graph you run through the UI will be run on the server itself (as its own process).</p><p>There is currently one argument specific to the &#39;serve&#39; option:</p><ul>
+<li>&#39;-p&#39; or &#39;--port&#39; to provide an alternate port to run the server on (default is 8080)</li>
+</ul>
+<p>It will be up to you to configure the networking so the client/server architecture works properly. If you have no need of this, you can simply run the serve command on your local computer (provide any additional arguments you desire):</p><pre><code>python3 -m graphex serve
+</code></pre>
+<p>And then navigate to &#39;<a href="https://localhost:8080&#39;">https://localhost:8080&#39;</a> in your browser. This will connect to the server you created on your local computer. If hosting the GraphEx server across a network, you would replace the words &#39;localhost&#39; with the IP or hostname of the machine serving GraphEx.</p><p><span class='note'>NOTE: </span> Some plugins may not function properly from a user machine. One such example is the ESXi plugin: Graphex should be served from an Ubuntu agent located on a virtual machine (VM) inside of the ESXi instance.</p><h2 id="run">Run</h2>
+<p>The &#39;run&#39; option is used to execute graphs that have already been built via the UI using the &#39;serve&#39; option. This is equivalent to running an application or python script on the CLI.</p><p>The following arguments are specific to the &#39;run&#39; option only:</p><ul>
+<li>&#39;-f&#39; or &#39;--file&#39; a <strong>REQUIRED</strong> argument that tells Graphex which file you want to run/execute</li>
+<li>&#39;-v&#39; or &#39;--verbose&#39; enables any logs set to the &#39;debug&#39; level inside a graph</li>
+<li>&#39;-o&#39; or &#39;--validate_only&#39; checks the graph file for errors and then exits instead of executing </li>
+<li>&#39;-i&#39; or &#39;--show_inputs&#39; logs the Graph Inputs that were provided to the graph at the top of the terminal. Inputs that were specified to be hidden will have their length replaced with asterisk (&#39;*&#39;) characters in the output.</li>
+</ul>
+<p>The &#39;run&#39; option will only execute on &#39;.gx&#39; files (GraphEx files). These are specially formatted files that are created when you save a graph through the UI (serve option).</p><p>For example, if you wanted to run a file called &#39;test.gx&#39;:</p><pre><code>python3 -m graphex run --file test.gx
+</code></pre>
+<p>Remember to provide any desired arguments.</p><h3 id="providing-graph-inputs">Providing Graph Inputs</h3>
+<p>Graph Inputs are arguments provided to an individual graph in order for it to execute. The are designated by the creator of the graph. On the command line, you will provide a graph input by the following syntax: inputName=inputValue</p><p>For example:</p><pre><code>python3 -m graphex run --file name_of_graph.gx MyInput=some_value
+</code></pre>
+<p>If you need to provide a sequence of text with spaces (i.e. a string with spaces), you can do so by placing quotation marks around your text:</p><pre><code>python3 -m graphex run -f Untitled-1.gx MyInput=&quot;Text with spaces&quot;
+</code></pre>
+<p>Lists can be provided on the command line by separating each list value with a space or a comma.</p><p>Some examples:</p><pre><code>python3 -m graphex run --file name_of_graph.gx SomeList=value1 value2 value3 SomeOtherList=otherValue1 etc
+python3 -m graphex run --file name_of_graph.gx SomeList=value1, value2, value3
+python3 -m graphex run --file name_of_graph.gx SomeList=value1,value2,value3
+</code></pre>
+<p>All of the examples above will give the following list to Graphex: [&quot;value1&quot;, &quot;value2&quot;, &quot;value3&quot;]. If you want to include the comma character (,) in your list, you will have to escape it with a double backslash:</p><pre><code>python3 -m graphex run --file name_of_graph.gx SomeList=value1\\, value2\\, value3
+python3 -m graphex run --file name_of_graph.gx SomeList=value1\\,value2\\,value3
+</code></pre>
+<p>If you escape the comma, GraphEx will <em>not</em> count the comma as a separator in your list. Thus the first example will create the list: [&quot;value1,&quot;, &quot;value2,&quot;, &quot;value3,&quot;] and the second example will create a list of a <em>a single item:</em> [&quot;value1,value2,value3&quot;].</p><p>When providing lists of strings, you do not have to &quot;quote&quot; the strings. The graph input was already previously defined in the UI to have a datatype of &quot;String List&quot;. That being said, if you provide quotes of either type (&quot;like this&quot; or &#39;this&#39;): GraphEx will remove them from the input. Thus MyInputList=&quot;abc&quot; &quot;def&quot; would become simply: abc def. If you want to include quotation marks, escape them with a single backslash:</p><pre><code># evaluates to [&quot;&#39;value1&#39;&quot;, &quot;&#39;value2&#39;&quot;]
+python3 -m graphex run --file name_of_graph.gx SomeListWithMarks=\&#39;value1\&#39; \&#39;value2\&#39;
+</code></pre>
+<p>Remember that you can see a list of what graph inputs are required for a graph using &quot;-h&quot;:</p><pre><code>python3 -m graphex run -f name_of_graph.gx -h
+
+...
+
+GRAPH-INPUT DATATYPE    VALUE       DESCRIPTION                    
+───────────────────────────────────────────────────────────────────
+MyInput     String 
+</code></pre>
+<p>The data you provide to each graph input after the equal sign (=) must match the datatype designated in the graph (as shown under the DATATYPE column in the &quot;-h&quot; menu output).</p><p>Graph Inputs themselves are explained in more detail in <a href="../ui/sidebar.html">the section explaining the Sidebar Panel</a>.</p><p><a href="../index.html">Return to Main Page</a></p>
+</body>
+</html>

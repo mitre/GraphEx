@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link rel="stylesheet" href="../graphexStyle.css">
+</head>
+<body>
+
+<h1 id="changelog">Changelog</h1>
+<p>This page was created to track changes to versions of GraphEx. The changelog was created in v1.4 of GraphEx and only changes starting from that version are tracked here.</p><h2 id="1160">1.16.0</h2>
+<ul>
+<li>GraphEx released as open source to the public</li>
+<li>Visual review of all project code with small updates to documentation, typo fixes, removal of unused imports and debugging statements, etc.</li>
+</ul>
+<h2 id="1158">1.15.8</h2>
+<ul>
+<li>Fix newline formatting bug in &quot;Named Format String&quot; node</li>
+</ul>
+<h2 id="1157">1.15.7</h2>
+<ul>
+<li>Bugfix to load graphs that have connections to nodes that do not exist</li>
+</ul>
+<h2 id="1155">1.15.5</h2>
+<ul>
+<li>Fix a bug that appeared during a merge conflict resolution when a graph input was deleted from one branch</li>
+</ul>
+<h2 id="1154">1.15.4</h2>
+<ul>
+<li>Report error in graphs that have more than one &#39;Graph Start&#39; node</li>
+</ul>
+<h2 id="1153">1.15.3</h2>
+<ul>
+<li>List remote branches in the Source Control pane</li>
+<li>Show the active repo in the Source Control pane</li>
+<li>Save git credentials in the Vue store</li>
+<li>Better error handling for invalid git credentials</li>
+</ul>
+<h2 id="1152">1.15.2</h2>
+<ul>
+<li>Change the terminal searchbar &#39;next&#39; and &#39;previous&#39; buttons to be &#39;up&#39; and &#39;down&#39; arrows instead of &#39;left&#39; and &#39;right&#39;</li>
+</ul>
+<h2 id="1151">1.15.1</h2>
+<ul>
+<li>Turn off server-side debug logging and set to &#39;WARNING&#39;</li>
+<li>Allow some CLI arguments such as &quot;-inv&quot; to be assigned an empty string (&quot;&quot;) to override config file values (for compatibility with older versions of GraphEx and mixed usage of an individual configuration file)</li>
+</ul>
+<h2 id="1150">1.15.0</h2>
+<ul>
+<li>Add new &#39;Source Control&#39; sidebar panel</li>
+<li>Add ability add, commit, and push changes to files from the UI</li>
+<li>Add ability to fetch, pull, and merge changes into the current branch from the UI</li>
+<li>Add ability to switch branches and create new branches from the UI</li>
+<li>Resolve merge conflicts from the UI</li>
+</ul>
+<h2 id="1141">1.14.1</h2>
+<ul>
+<li>Add back in deprecated/legacy node &#39;Get Nested Data Container List&#39;</li>
+</ul>
+<h2 id="1140">1.14.0</h2>
+<ul>
+<li>Update icons for &#39;.bash&#39;, &#39;.zsh&#39;, &#39;.gz&#39;, &#39;.zip&#39;, &#39;.7z&#39;, &#39;.xz&#39; extensions in the Files sidebar</li>
+<li>Create &#39;Data Container&#39; nodes to handle adding and extracting primitive lists</li>
+<li>Lighten the color of &#39;Data Container&#39; nodes to make them easier to see in the graph</li>
+<li>Add optional &#39;Ignore Dot Notation&#39; socket input to storing and retrieval of nested Data Containers (and lists)</li>
+<li>Add more pip package dependencies to GraphEx for the purpose of supporting traditional graph/plotting visualizations</li>
+<li>Add nodes to plot graphs and output them as PNG image files in GraphEx</li>
+<li>Add node to sort lists</li>
+<li>Add more nodes for retrieval of number and boolean values from Data Containers</li>
+</ul>
+<h2 id="1130">1.13.0</h2>
+<ul>
+<li>Rework the &#39;Named Format String&#39; to no longer work with specific datatypes and lists. Instead, the node now expects all inputs to be singular strings and makes the process of &#39;generating inputs&#39; less confusing for users.</li>
+<li>Mark three of the other &#39;Format String&#39; nodes as deprecated for future removal !!! Annotate that the normal &#39;Format String&#39; isn&#39;t recommended for use</li>
+<li>The &#39;Named Format String&#39; node now allows for the escaping of curly braces with the standard backslash character: &#39;&#39;</li>
+<li>The &#39;Named Format String&#39; node now highlights the sections in the textbox that will have text inserted into them</li>
+<li>Add &#39;List To String&#39; node to convert Lists of all datatypes into a single string (for objects it is assumed the (plugin) object&#39;s developer implemented a toString method)</li>
+<li>Create &#39;Add Exception Handling&#39; right-click (dropdown) menu in the editor context menu</li>
+</ul>
+<h2 id="1122">1.12.2</h2>
+<ul>
+<li>Fix a bug with GraphEx generating SSL certificates with the same serial number over and over (1000) on every machine running GraphEx. This resolves the error sometimes encountered in Firefox: &#39;SEC_ERROR_REUSED_ISSUER_AND_SERIAL&#39;.</li>
+</ul>
+<h2 id="1121">1.12.1</h2>
+<ul>
+<li>Fix image links not opening in Chromium based browsers due to a new security policy on &#39;data&#39; links</li>
+</ul>
+<h2 id="1120">1.12.0</h2>
+<ul>
+<li>Add &#39;forward&#39; and &#39;back&#39; buttons to the Terminal Panel searchbar</li>
+<li>Add &#39;case sensitve&#39; search option to Terminal Panel searchbar</li>
+<li>Add &#39;match count&#39; to the Terminal Panel searchbar (e.g. Match 1 of &#39;n&#39;)</li>
+<li>Add a filter option against the &#39;type&#39; of log message to the Terminal Panel searchbar</li>
+<li>Add right-click option to terminal to &#39;export&#39; a log in original JSON format for future &#39;import&#39; on other GraphEx instances</li>
+<li>Rename existing right-click options to download logs to avoid confusion amongst all three available options</li>
+<li>Rename &#39;File&#39; -&gt; &#39;Open File...&#39; to &#39;Open File (Client)...&#39; and &#39;File&#39; -&gt; &#39;Open Log File...&#39; to &#39;Open Log File (Server)...&#39;</li>
+<li>Add ability to import log files using the &#39;File&#39; -&gt; &#39;Open File (Client)...&#39; dialog</li>
+<li>Change the color and style of checkboxes to make them easier to see against dark backgrounds</li>
+</ul>
+<h2 id="1111">1.11.1</h2>
+<ul>
+<li>Fix bug where the yellow warning color for unused graph inputs was remaining when renaming a graph input that was un-used</li>
+<li>Fix bug where the UI was sometimes unable to find erroring graphs when graphs were executed inside directory structures</li>
+<li>Fix formatting issue with error output on the command line when verbose error logging is enabled (ID: ... was on the same line as errorLink: ...)</li>
+</ul>
+<h2 id="1110">1.11.0</h2>
+<ul>
+<li>Enables the import of Graph Inputs from configuration files into the currently opened graph in the editor panel<ul>
+<li>Use the new &#39;Import&#39; button (looks like a &#39;download button&#39;) from the &#39;Configure Graph&#39; Sidebar Panel</li>
+</ul>
+</li>
+</ul>
+<h2 id="1102">1.10.2</h2>
+<ul>
+<li>Add clickable hyperlinks to the help popup of all relevant base/vanilla GraphEx nodes (for more documentation reference)</li>
+<li>Adds warning icons to inform the user of graphs that completed with warnings in the UI</li>
+</ul>
+<h2 id="1101">1.10.1</h2>
+<ul>
+<li>Fix &#39;sticky&#39; behavior of dropdown menus that are nested inside each other</li>
+</ul>
+<h2 id="1100">1.10.0</h2>
+<ul>
+<li>Add reference finder for execute graph nodes to graph search panel</li>
+</ul>
+<h2 id="195">1.9.5</h2>
+<ul>
+<li>Fix import error with typing python module</li>
+</ul>
+<h2 id="194">1.9.4</h2>
+<ul>
+<li>Fix warning for default number primitive to &#39;light up&#39; as a warning for &#39;-2&#39; instead of &#39;-1&#39;</li>
+<li>Add warning for unused data and generator nodes</li>
+<li>The &#39;Errors Panel&#39; is renamed to the &#39;Errors and Warnings&#39; Panel</li>
+</ul>
+<h2 id="193">1.9.3</h2>
+<ul>
+<li>GraphEx server now uses pyopenssl to generate SSL certificates if the user doesn&#39;t specify certificates to use</li>
+<li>GraphEx server no longer uses &#39;dummy&#39;/adhoc/single use certificates</li>
+</ul>
+<h2 id="192">1.9.2</h2>
+<ul>
+<li>Fixes bug where sometimes error links couldn&#39;t be opened when left-clicking them in the UI</li>
+</ul>
+<h2 id="191">1.9.1</h2>
+<ul>
+<li>Fixes issue parsing lists in yaml configuration files related to composite graph inputs</li>
+</ul>
+<h2 id="190">1.9.0</h2>
+<ul>
+<li>Add new &#39;Inventory system&#39; for managing static data. Paths to YML inventory files can be provided on the command line and the data itself seen from inside the UI. The data is displayed in a new sidebar panel and you can drag any data in &#39;boxes&#39; out into the editor panel to create that data in the graph. Changes to the data specified in the YML files will automatically update the values in existing graphs.</li>
+<li>New List Compression Loop</li>
+<li>Index number indicators next to individual items fed into a list input socket</li>
+<li>Changes the sidebar icon for &#39;Graph Search&#39; to hopefully cut back on confusion between the nodes panel and the graph search panel</li>
+<li>Changes the sidebar icon for &#39;Variables&#39; back to &#39;ABC&#39;</li>
+<li>Verbose error mode now raises more exceptions with stack traces during program initialization</li>
+<li>Enables the use of <em>List</em> &#39;Variable Output Sockets&#39; for developers to create &#39;Save to Variable&#39; checkboxes</li>
+<li>Adds &#39;Warnings&#39; to the Errors Panels and yellow icon color to itself and the Graph Input Panel (for unused inputs)</li>
+<li>More right-click menu options for the editor panel to quickly create common nodes</li>
+</ul>
+<h2 id="181">1.8.1</h2>
+<ul>
+<li>Strip white space from subprocess stdout and stderr</li>
+</ul>
+<h2 id="180">1.8.0</h2>
+<ul>
+<li>Add subprocess node for running command on machine serving graphex server or machine running graph.</li>
+</ul>
+<h2 id="171">1.7.1</h2>
+<ul>
+<li>Fix bug causing socket edges to overlap help popup modals in the editor</li>
+</ul>
+<h2 id="170">1.7.0</h2>
+<ul>
+<li>Add functionality to GraphEx that allows for graphs with objects as inputs to be run from the GraphEx UI. This feature must be implemented by the developer of the object in order for it to be usable by users (on a per object basis).</li>
+</ul>
+<h2 id="168">1.6.8</h2>
+<ul>
+<li>Developer only patch: more groundwork towards git functionality in GraphEx UI</li>
+</ul>
+<h2 id="167">1.6.7</h2>
+<ul>
+<li>Developer only patch: groundwork towards git functionality in GraphEx UI</li>
+</ul>
+<h2 id="166">1.6.6</h2>
+<ul>
+<li>Move the git and virtual environment info to the top menu bar.</li>
+</ul>
+<h2 id="165">1.6.5</h2>
+<ul>
+<li>Add Copy, cut, and paste options in the context menu for input fields</li>
+</ul>
+<h2 id="164">1.6.4</h2>
+<ul>
+<li>The &#39;vault&#39; mode on the CLI will now allow you to continue to input new secrets if you want it to</li>
+</ul>
+<h2 id="163">1.6.3</h2>
+<ul>
+<li>Fixed a bug with the breakpoint node not logging graph inputs or variables if &#39;end program&#39; was unchecked</li>
+</ul>
+<h2 id="v162">v1.6.2</h2>
+<ul>
+<li>Adds a button to reset default value in the Run Graph modal</li>
+<li>Adds icon to show which default values have been updated</li>
+</ul>
+<h2 id="v161">v1.6.1</h2>
+<ul>
+<li>Fixes bug with return type in the configuration file causing the server to crash on Ubuntu</li>
+</ul>
+<h2 id="v16">v1.6</h2>
+<ul>
+<li>Adds a new Node Help component with clickable links to external documentation</li>
+<li>Adds hyperlinks to node metadata</li>
+</ul>
+<h2 id="v15">v1.5</h2>
+<ul>
+<li>Graph Inputs are are now arranged in the sidebar under the the category in which they are configured for</li>
+</ul>
+<h2 id="v14">v1.4</h2>
+<ul>
+<li>Introduces the &#39;vault&#39; mode on the command line<ul>
+<li>Adds the ability to encrypt Graph Inputs to hide sensitive information (such as passwords) in both the configuration file and the UI</li>
+</ul>
+</li>
+<li>Removes JSON as an option for configuration files (use YML instead)</li>
+<li>Documentation on &#39;Change Log&#39; created (this one)</li>
+<li>Documentation on &#39;Secrets&#39;created</li>
+</ul>
+<p><a href="../index.html">Return to Main Page</a></p>
+</body>
+</html>
