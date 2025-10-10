@@ -34,13 +34,7 @@ install:
 
 remove:
 	rm -rf dist build
-	pip uninstall -y graphex
-
-run:
-	@cd frontend && npm install
-	@cd frontend && npm run build
-	$(MAKE) docs
-	@python3 -m graphex serve --port 8080 --root ./graphex
+	pip uninstall -y mitre-graphex
 
 run-dev: docs
 	@cd frontend && npm install
