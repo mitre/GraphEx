@@ -413,7 +413,7 @@ class GraphServer:
             repo = repo
 
         return {
-            "graphex": str(version("graphex")),
+            "graphex": str(version("mitre-graphex")),
             "plugins": info_dict,
             "config": config,
             "venv": venv,

@@ -17,7 +17,7 @@ def get_package_data():
 
 setup(
     name="mitre-graphex",
-    version="1.16.0",
+    version="1.16.1",
     author="The MITRE Corporation",
     description="Visual programming tool for environment automation.",
     packages=find_packages(include=["graphex*"]),
