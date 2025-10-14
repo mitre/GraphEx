@@ -162,6 +162,21 @@ HIDE_SECRET_INPUT = Argument(
 PASSWORD = None
 
 
+def get_terminal_width(default: int = 120, max_width: int = 240) -> int:
+    """
+    Return a terminal width that is safe to use in headless/non-TTY environments.
+    Clamps to a sensible range to avoid excessively large widths from environment variables.
+    """
+    try:
+        if sys.stdout.isatty():
+            width = shutil.get_terminal_size(fallback=(default, 24)).columns
+        else:
+            width = int(os.environ.get("COLUMNS", default))
+    except Exception:
+        width = default
+    return max(40, min(width, max_width))  
+
+
 def fit_text_to_width(text: str, width: int) -> typing.List[str]:
     """
     Wrap the given text such that it fits into the given width.
@@ -227,7 +242,7 @@ def print_table(
     print()
 
     # Print divider
-    print("─" * shutil.get_terminal_size().columns)
+    print("─" * sum(widths))
 
     # Print rows
     for row in rows:
@@ -273,7 +288,7 @@ def print_help_and_exit(
                 for name, value in input["childValues"].items()
             }
 
-    TERMINAL_WIDTH = shutil.get_terminal_size().columns
+    TERMINAL_WIDTH = get_terminal_width()
 
     if errors:
         for error in errors:
