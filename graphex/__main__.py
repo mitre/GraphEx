@@ -890,9 +890,9 @@ if MODE == "serve":
         )
 
     # Handle the log rollover precendence
-    log_rollover_amount = LOG_ROLLOVER.value
+    log_rollover_amount: int = int(LOG_ROLLOVER.value)
     if config and config.contents["log_rollover_amount"]:
-        log_rollover_amount = config.contents["log_rollover_amount"]
+        log_rollover_amount = int(config.contents["log_rollover_amount"])
 
     # Start the server
     if config:
