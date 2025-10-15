@@ -55,4 +55,7 @@ python3 -m pip install graphex-esxi-utils graphex-webautomation-plugin
 ```
 
 [Then serve GraphEx](docs/markdown/setup/running.md) and drag the added nodes into your graph to start using them!:
+
+<br/>
+
 ![Available subcategories and nodes in the sidebar for the graphex_esxi_utils plugin](https://github.com/mitre/GraphEx-ESXi-Utilities/blob/main/graphex_esxi_utils/docs/markdown/images/vm_categories.png)
