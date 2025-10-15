@@ -32,7 +32,8 @@ python3 -m pip install mitre-graphex
 </code></pre>
 <p>Navigate into the folder retrieved from the server. Install the python package dependencies for Graphex by running the following command:</p><pre><code>python3 setup.py install
 </code></pre>
-<p>Then build and install the program with make:</p><pre><code>make all
+<p>Then build and install the program with make:</p><pre><code>python3 -m pip install build wheel
+make all
 </code></pre>
 <p>Graphex should now be installed on your system. You can check by running:</p><pre><code>python3 -m pip list
 </code></pre>

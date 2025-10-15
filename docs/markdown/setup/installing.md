@@ -64,6 +64,7 @@ python3 setup.py install
 
 Then build and install the program with make:
 ```
+python3 -m pip install build wheel
 make all
 ```
 
