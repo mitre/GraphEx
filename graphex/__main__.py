@@ -110,6 +110,9 @@ INVENTORY = Argument(
     flags=["-inv", "--inventory_path"],
     description="An inventory file (YML) to populate the inventory sidebar in the GraphEx UI.",
 )
+LOG_ROLLOVER = Argument(
+    value=20, flags=["-lr", "--log_rollover_amount"], description="How many local logs to keep before deleting the oldest log when starting a new one (rollover)."
+)
 
 MODE = None
 
@@ -748,7 +751,8 @@ if MODE == "serve":
         VERBOSE_ERRORS,
         SSL_CERTIFICATES,
         PASSWORD_PATH,
-        INVENTORY
+        INVENTORY,
+        LOG_ROLLOVER
     ]
     errors, args = load_arguments(SERVE_ARGUMENTS, args)
     if len(args) > 0:
@@ -885,6 +889,11 @@ if MODE == "serve":
             mode=MODE, args=SERVE_ARGUMENTS, graph_inputs=[], errors=errors
         )
 
+    # Handle the log rollover precendence
+    log_rollover_amount: int = int(LOG_ROLLOVER.value)
+    if config and config.contents["log_rollover_amount"]:
+        log_rollover_amount = int(config.contents["log_rollover_amount"])
+
     # Start the server
     if config:
         print(f"Using configuration file from: {config.path}")
@@ -893,7 +902,8 @@ if MODE == "serve":
         config=config,
         ssl_certs_path=ssl_certs_path,
         vault_password=vault_password,
-        inventory=inv
+        inventory=inv,
+        log_rollover_amount=log_rollover_amount
     )
     server.start(port=PORT.value)
 

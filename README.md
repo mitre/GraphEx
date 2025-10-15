@@ -13,10 +13,49 @@ You do not need any programming knowledge to use Graphex. It was designed to all
 
 ![The Graphex UI](docs/markdown/images/GraphexUI.png)
 
-# Graphex Documentation
+# Installation
 
-For documentation on Graphex and its plugins, please read the offical documentation located at: [docs/markdown/index.md](docs/markdown/index.md) or [docs/html/index.html](docs/html/index.html)<br />
+GraphEx is available in pip via pypi and is recommended to be installed in a virtual environment (venv):
+```
+python3 -m pip install mitre-graphex
+```
+
+GraphEx has a built in help menu:
+```
+python3 -m graphex -h
+```
+
+![The top level help menu for graphex](docs/markdown/images/HelpTerminal.png)
+
+You can quickly serve the UI with built-in graph execution via:
+```
+python3 -m graphex serve
+```
+
+Then navigate to https://localhost:8080 to get started creating executable graphs!
+
+# Documentation
+
+For documentation on Graphex usage please read the offical documentation located at: [docs/markdown/index.md](docs/markdown/index.md). <br />
 
 This documentation can also be reached from inside the Graphex UI itself by navigating to 'Help' -> 'Documentation (Tutorial)' on the menu bar. <br />
 
-This readme page itself (right here) is not guaranteed to be maintained.
+# Plugins
+
+GraphEx is intended to extended via its built-in plugin system. Plugins enable python3 developers to add custom, encapsulated functionality to GraphEx via nodes and datatypes.
+
+For example, most GraphEx users at the time of this writing experience GraphEx alongside these plugins:
+- [GraphEx-ESXi-Utilities](https://github.com/mitre/GraphEx-ESXi-Utilities)
+- [GraphEx-Web-Automation-Plugin](https://github.com/mitre/GraphEx-Web-Automation-Plugin)
+
+These plugins add hundreds of nodes for configuring and controlling ESXi and its virtual machines, handling SSH and WinRM connections, running/executing and monitoring ansible playbooks and automating browser interaction via playwright. No coding experience is needed to leverage these automation tools! Simply pip install the plugins alongside the core mitre-graphex package:
+
+```
+python3 -m pip install graphex-esxi-utils graphex-webautomation-plugin
+```
+
+[Then serve GraphEx](docs/markdown/setup/running.md) and drag the added nodes into your graph to start using them!:
+
+<br/>
+
+![Available subcategories and nodes in the sidebar for the graphex_esxi_utils plugin](https://github.com/mitre/GraphEx-ESXi-Utilities/blob/main/graphex_esxi_utils/docs/markdown/images/vm_categories.png)

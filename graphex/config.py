@@ -30,6 +30,9 @@ class ConfigFile(typing.TypedDict):
     inventory_path: typing.Optional[str]
     """The path to the inventory file to use in the GraphEx UI"""
 
+    log_rollover_amount: typing.Optional[int]
+    """The number of logs retain before rolling over the oldest one to write the latest one"""
+
 
 class GraphConfig:
     """
@@ -50,7 +53,8 @@ class GraphConfig:
             "graph_inputs": {},
             "secrets": {},
             "vault_password_path": None,
-            "inventory_path": None
+            "inventory_path": None,
+            "log_rollover_amount": None
         }
         """The contents of the config."""
 
@@ -129,6 +133,12 @@ class GraphConfig:
                 self.contents["inventory_path"] = self.contents["Inventory_path"]
             else:
                 self.contents["inventory_path"] = None
+
+        if "log_rollover_amount" not in self.contents:
+            if "Log_Rollover_Amount" in self.contents:
+                self.contents["log_rollover_amount"] = self.contents["Log_Rollover_Amount"]
+            else:
+                self.contents["log_rollover_amount"] = None
             
 
         # When a filename is specified but no values are provided to it, remove it as an option

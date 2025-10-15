@@ -15,31 +15,34 @@
 <li>node (v18.15.0 or greater) and npm (v9.5.0 or greater)</li>
 <li>make</li>
 </ul>
-<p>It is also recommended that you build the application in a python virtual environment (venv). This helps ensure that different python packages (especially ones that may be critical to your system) don&#39;t have conflicts between each other.</p><h2 id="installing-a-released-graphex-version">Installing a Released Graphex Version</h2>
-<p>GraphEx may be available via pip. If available, then you can simply install the latest graphex package via:</p><pre><code>python3 -m pip install --upgrade pip
-python3 -m pip install graphex
+<p>It is also recommended that you install the application in a python virtual environment (venv). This helps ensure that different python packages (especially ones that may be critical to your system) don&#39;t have conflicts between each other.</p><h2 id="installing-a-released-graphex-version">Installing a Released Graphex Version</h2>
+<p>GraphEx is available via pip: you can simply install the latest graphex package via:</p><pre><code>python3 -m pip install --upgrade pip
+python3 -m pip install mitre-graphex
 </code></pre>
 <p>Graphex should now be installed on your system. You can check by running:</p><pre><code>python3 -m pip list
 </code></pre>
-<p>You should see Graphex in the list of packages installed by pip. Unix systems can grep the result for Graphex.</p><p>You can install any released Graphex plugin that is available in pip in this same way. For example, the esxi_utils plugin could be installed with (if available):</p><pre><code>python3 -m pip install graphex_esxi_utils
+<p>You should see Graphex in the list of packages installed by pip. Unix systems can grep the result for Graphex.</p><p>You can install any released Graphex plugin that is available in pip in this same way. For example, the esxi_utils plugin could be installed with:</p><pre><code>python3 -m pip install graphex-esxi-utils
+</code></pre>
+<p>Likewise, the web automation plugin can be installed with:</p><pre><code>python3 -m pip install graphex-webautomation-plugin
 </code></pre>
 <p><a href="#installing-plugins">Click here for instructions on installing plugins that aren&#39;t located in the pip feed</a>.</p><p>At this point, &#39;vanilla&#39; Graphex is installed. <a href="running.html">Click here</a> to navigate to instructions on how to run Graphex.</p><h2 id="building-from-source">Building from Source</h2>
 <p>Create a python virtual environment (venv) now if you intend to use one.</p><p>Ensure you have the latest version of pip for python running the following command:</p><pre><code>python3 -m pip install --upgrade pip
 </code></pre>
-<p>You can download this repository using git:</p><pre><code>git clone https://graphex_repo_location
+<p>You can download this repository using git:</p><pre><code>git clone https://github.com/mitre/GraphEx
 </code></pre>
 <p>Navigate into the folder retrieved from the server. Install the python package dependencies for Graphex by running the following command:</p><pre><code>python3 setup.py install
 </code></pre>
-<p>Then build and install the program with make:</p><pre><code>make all
+<p>Then build and install the program with make:</p><pre><code>python3 -m pip install build wheel
+make all
 </code></pre>
 <p>Graphex should now be installed on your system. You can check by running:</p><pre><code>python3 -m pip list
 </code></pre>
 <p>You should see Graphex in the list of packages installed by pip. Unix systems can grep the result for Graphex.</p><p>At this point, &#39;vanilla&#39; Graphex is installed. <a href="running.html">Click here</a> to navigate to instructions on how to run Graphex or <a href="#installing-plugins">continue to the next section for instructions on installing plugins</a>.</p><h3 id="installing-plugins">Installing Plugins</h3>
-<p>Plugins for Graphex are installed as standalone python packages. Each plugin will have its own pip (python package) dependencies that will need to be installed before the package itself can be installed. The process to install a plugin is functionally identical to the process you just followed to install Graphex.</p><p>As an example, there is a ESXi Utilities package available for graphex.</p><p>You would clone the repository (in the same way you cloned the Graphex application):</p><pre><code>git clone https://utils_repo_location
+<p>Plugins for Graphex are installed as standalone python packages. Each plugin will have its own pip (python package) dependencies that will need to be installed before the package itself can be installed. The process to install a plugin is functionally identical to the process you just followed to install Graphex.</p><p>As an example, there is a ESXi Utilities package available for graphex.</p><p>You would clone the repository (in the same way you cloned the Graphex application):</p><pre><code>git clone https://github.com/mitre/GraphEx-ESXi-Utilities
 </code></pre>
 <p>Navigate into the folder retrieved from the server. Install the python package dependencies for the plugin by running the following command (it may error):</p><pre><code>python3 setup.py install
 </code></pre>
-<p>If you receive an error after running this command, it is likely because you are missing a dependency for the package. This particular plugin requires the &#39;esxi_utils&#39; python package (the library containing the functions to interface with ESXi). You would install it in the same manner as has been described here.</p><p>When you have resolved all your dependency installation errors, you can install the package itself:</p><pre><code>make all
+<p>If you receive an error after running this command, it is likely because you are missing a dependency for the package. This particular plugin requires the &#39;esxi_utils&#39; python package (the library containing the functions to interface with ESXi). You would install it in the same manner as has been described here. You can find <a href="https://github.com/mitre/Python-ESXi-Utilities">esxi utils here</a>.</p><p>When you have resolved all your dependency installation errors, you can install the package itself:</p><pre><code>make all
 </code></pre>
 <p>The plugin for Graphex should now be installed on your system. You can check by running:</p><pre><code>python3 -m pip list
 </code></pre>

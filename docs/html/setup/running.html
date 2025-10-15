@@ -8,8 +8,9 @@
 <h1 id="running-graphex">Running Graphex</h1>
 <p>Graphex is run via the command line interface (CLI) as a python module. A built in help menu is available to assist you in providing arguments to the module.</p><p>The help menu can be reached by running:</p><pre><code>python3 -m graphex -h
 </code></pre>
-<p>You will notice that there are two primary options/modes: serve and run. The serve option creates a webserver that can be connected to via a browser and provides you with a User Interface (UI) in which to plot (and run) graphs with. The run option lets you run a previously created graph without a UI.</p><p>More comprehensive help for each option can be found by chaining the help flag, e.g.:</p><pre><code>python3 -m graphex serve -h
+<p>You will notice that there are three primary options/modes: serve, run, and vault. The serve option creates a webserver that can be connected to via a browser and provides you with a User Interface (UI) in which to plot (and run) graphs with. The run option lets you run a previously created graph without a UI. The vault option allows you to store secrets locally on your filesystem that can be used in your graphex graphs.</p><p>More comprehensive help for each option can be found by chaining the help flag, e.g.:</p><pre><code>python3 -m graphex serve -h
 python3 -m graphex run -h
+python3 -m graphex vault -h
 </code></pre>
 <h2 id="common-arguments">Common Arguments</h2>
 <p>There are some arguments that can be provided to both the &#39;serve&#39; and &#39;run&#39; options:</p><ul>
@@ -22,9 +23,10 @@ python3 -m graphex run -h
 </ul>
 <p>Provide the arguments following either the &#39;serve&#39; or &#39;run&#39; option. For example, if I wanted to provide two plugins to Graphex:</p><pre><code>python3 -m graphex serve --plugins graphex_esxi_utils, some_other_graphex_plugin
 </code></pre>
-<p><span class='warning'>WARNING: </span> External plugin code and documentation can&#39;t be verified to be safe to use by GraphEx itself. Verify that the plugin you are installing is safe before providing it as an argument to GraphEx.</p><h2 id="serve">Serve</h2>
-<p>The &#39;serve&#39; option is the primary way you will interface with Graphex. This option will create a web server on the machine it is run from. This server can be reached from any other computer that can access the computer that the server is running on.</p><p>Any computer with a connection can then act as a client to the server. The client receives a UI that lets the user plot nodes on graphs. As the user, you can save plotted graphs to the server or download them to your local machine. Any graph you run through the UI will be run on the server itself (as its own process).</p><p>There is currently one argument specific to the &#39;serve&#39; option:</p><ul>
+<p><span class='warning'>WARNING: </span> External plugin code and documentation can&#39;t be verified to be safe to use by GraphEx itself. Verify that the plugin you are installing is safe before providing it as an argument to GraphEx.</p><p><span class='note'>NOTE: </span> The names of python modules are always referenced via underscores (e.g. graphex_esxi_utils).</p><h2 id="serve">Serve</h2>
+<p>The &#39;serve&#39; option is the primary way you will interface with Graphex. This option will create a web server on the machine it is run from. This server can be reached from any other computer that can access the computer that the server is running on.</p><p>Any computer with a connection can then act as a client to the server. The client receives a UI that lets the user plot nodes on graphs. As the user, you can save plotted graphs to the server or download them to your local machine. Any graph you run through the UI will be run on the server itself (as its own process).</p><p>These are the arguments specific to the &#39;serve&#39; option:</p><ul>
 <li>&#39;-p&#39; or &#39;--port&#39; to provide an alternate port to run the server on (default is 8080)</li>
+<li>&#39;-lr&#39; or &#39;--log_rollover_amount&#39; to provide the number of logs to save before deleting the oldest one when creating a new log (default is 20)</li>
 </ul>
 <p>It will be up to you to configure the networking so the client/server architecture works properly. If you have no need of this, you can simply run the serve command on your local computer (provide any additional arguments you desire):</p><pre><code>python3 -m graphex serve
 </code></pre>
@@ -60,6 +62,7 @@ GRAPH-INPUT DATATYPE    VALUE       DESCRIPTION
 ───────────────────────────────────────────────────────────────────
 MyInput     String 
 </code></pre>
-<p>The data you provide to each graph input after the equal sign (=) must match the datatype designated in the graph (as shown under the DATATYPE column in the &quot;-h&quot; menu output).</p><p>Graph Inputs themselves are explained in more detail in <a href="../ui/sidebar.html">the section explaining the Sidebar Panel</a>.</p><p><a href="../index.html">Return to Main Page</a></p>
+<p>The data you provide to each graph input after the equal sign (=) must match the datatype designated in the graph (as shown under the DATATYPE column in the &quot;-h&quot; menu output).</p><p>Graph Inputs themselves are explained in more detail in <a href="../ui/sidebar.html">the section explaining the Sidebar Panel</a>.</p><h2 id="vault">Vault</h2>
+<p>There is a dedicated document on secrets and the vault mode that you can <a href="../advanced/secrets.html">read here</a>.</p><p><a href="../index.html">Return to Main Page</a></p>
 </body>
 </html>

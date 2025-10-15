@@ -7,12 +7,13 @@ The help menu can be reached by running:
 python3 -m graphex -h
 ```
 
-You will notice that there are two primary options/modes: serve and run. The serve option creates a webserver that can be connected to via a browser and provides you with a User Interface (UI) in which to plot (and run) graphs with. The run option lets you run a previously created graph without a UI.
+You will notice that there are three primary options/modes: serve, run, and vault. The serve option creates a webserver that can be connected to via a browser and provides you with a User Interface (UI) in which to plot (and run) graphs with. The run option lets you run a previously created graph without a UI. The vault option allows you to store secrets locally on your filesystem that can be used in your graphex graphs.
 
 More comprehensive help for each option can be found by chaining the help flag, e.g.:
 ```
 python3 -m graphex serve -h
 python3 -m graphex run -h
+python3 -m graphex vault -h
 ```
 
 ## Common Arguments
@@ -32,14 +33,17 @@ python3 -m graphex serve --plugins graphex_esxi_utils, some_other_graphex_plugin
 
 $warning$ External plugin code and documentation can't be verified to be safe to use by GraphEx itself. Verify that the plugin you are installing is safe before providing it as an argument to GraphEx.
 
+$note$ The names of python modules are always referenced via underscores (e.g. graphex_esxi_utils).
+
 ## Serve
 
 The 'serve' option is the primary way you will interface with Graphex. This option will create a web server on the machine it is run from. This server can be reached from any other computer that can access the computer that the server is running on.
 
 Any computer with a connection can then act as a client to the server. The client receives a UI that lets the user plot nodes on graphs. As the user, you can save plotted graphs to the server or download them to your local machine. Any graph you run through the UI will be run on the server itself (as its own process).
 
-There is currently one argument specific to the 'serve' option:
+These are the arguments specific to the 'serve' option:
 - '-p' or '--port' to provide an alternate port to run the server on (default is 8080)
+- '-lr' or '--log_rollover_amount' to provide the number of logs to save before deleting the oldest one when creating a new log (default is 20)
 
 It will be up to you to configure the networking so the client/server architecture works properly. If you have no need of this, you can simply run the serve command on your local computer (provide any additional arguments you desire):
 ```
@@ -120,5 +124,10 @@ MyInput     String
 The data you provide to each graph input after the equal sign (=) must match the datatype designated in the graph (as shown under the DATATYPE column in the "-h" menu output).
 
 Graph Inputs themselves are explained in more detail in [the section explaining the Sidebar Panel](../ui/sidebar.md).
+
+## Vault
+
+There is a dedicated document on secrets and the vault mode that you can [read here](../advanced/secrets.md).
+
 
 [Return to Main Page](../index.md)

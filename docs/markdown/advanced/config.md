@@ -30,6 +30,13 @@ ssl_certificates_path: "/path/to/ssl/certs/directory"
 # This can be pointed to a directory containing directories
 inventory_path: "/path/to/directory/with/inventory/files"
 
+# Optional path to a text file containing the password to unlock the secrets vaulted in this file
+# For more information read the GraphEx documentation or run: 'python3 -m graphex vault' for the vault help menu
+vault_password_path:
+
+# Configurable amount of logs to retain before removing the old ones and replacing them with new ones
+log_rollover_amount: 20
+
 # Custom values for running graphs
 graph_inputs:
   "*":
