@@ -395,4 +395,11 @@ You are free to use your own CSS when stylizing your plugin documents. By defaul
 
 While it may be possible to use relative pathing to reference the *exact* same CSS sheet that GraphEx uses, it is not recommended as your files will still have no CSS applied to them when viewed from outside GraphEx.
 
+## Active Plugin Repositories
+
+Two examples of GraphEx plugins actively in use can be found at these repositories:
+- [GraphEx-ESXi-Utilities](https://github.com/mitre/GraphEx-ESXi-Utilities)
+- [GraphEx-Web-Automation-Plugin](https://github.com/mitre/GraphEx-Web-Automation-Plugin)
+
+
 [Return to Main Page](../index.md)

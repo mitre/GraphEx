@@ -12,14 +12,14 @@ The following applications are required if building from source:
 - node (v18.15.0 or greater) and npm (v9.5.0 or greater)
 - make
 
-It is also recommended that you build the application in a python virtual environment (venv). This helps ensure that different python packages (especially ones that may be critical to your system) don't have conflicts between each other.
+It is also recommended that you install the application in a python virtual environment (venv). This helps ensure that different python packages (especially ones that may be critical to your system) don't have conflicts between each other.
 
 ## Installing a Released Graphex Version
 
-GraphEx may be available via pip. If available, then you can simply install the latest graphex package via:
+GraphEx is available via pip: you can simply install the latest graphex package via:
 ```
 python3 -m pip install --upgrade pip
-python3 -m pip install graphex
+python3 -m pip install mitre-graphex
 ```
 
 Graphex should now be installed on your system. You can check by running:
@@ -29,9 +29,14 @@ python3 -m pip list
 
 You should see Graphex in the list of packages installed by pip. Unix systems can grep the result for Graphex.
 
-You can install any released Graphex plugin that is available in pip in this same way. For example, the esxi_utils plugin could be installed with (if available):
+You can install any released Graphex plugin that is available in pip in this same way. For example, the esxi_utils plugin could be installed with:
 ```
-python3 -m pip install graphex_esxi_utils
+python3 -m pip install graphex-esxi-utils
+```
+
+Likewise, the web automation plugin can be installed with:
+```
+python3 -m pip install graphex-webautomation-plugin
 ```
 
 [Click here for instructions on installing plugins that aren't located in the pip feed](#installing-plugins).
@@ -49,7 +54,7 @@ python3 -m pip install --upgrade pip
 
 You can download this repository using git:
 ```
-git clone https://graphex_repo_location
+git clone https://github.com/mitre/GraphEx
 ```
 
 Navigate into the folder retrieved from the server. Install the python package dependencies for Graphex by running the following command:
@@ -79,7 +84,7 @@ As an example, there is a ESXi Utilities package available for graphex.
 
 You would clone the repository (in the same way you cloned the Graphex application):
 ```
-git clone https://utils_repo_location
+git clone https://github.com/mitre/GraphEx-ESXi-Utilities
 ```
 
 Navigate into the folder retrieved from the server. Install the python package dependencies for the plugin by running the following command (it may error):
@@ -87,7 +92,7 @@ Navigate into the folder retrieved from the server. Install the python package d
 python3 setup.py install
 ```
 
-If you receive an error after running this command, it is likely because you are missing a dependency for the package. This particular plugin requires the 'esxi_utils' python package (the library containing the functions to interface with ESXi). You would install it in the same manner as has been described here.
+If you receive an error after running this command, it is likely because you are missing a dependency for the package. This particular plugin requires the 'esxi_utils' python package (the library containing the functions to interface with ESXi). You would install it in the same manner as has been described here. You can find [esxi utils here](https://github.com/mitre/Python-ESXi-Utilities).
 
 When you have resolved all your dependency installation errors, you can install the package itself:
 ```

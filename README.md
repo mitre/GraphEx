@@ -15,7 +15,7 @@ You do not need any programming knowledge to use Graphex. It was designed to all
 
 # Graphex Documentation
 
-For documentation on Graphex and its plugins, please read the offical documentation located at: [docs/markdown/index.md](docs/markdown/index.md) or [docs/html/index.html](docs/html/index.html)<br />
+For documentation on Graphex usage please read the offical documentation located at: [docs/markdown/index.md](docs/markdown/index.md). <br />
 
 This documentation can also be reached from inside the Graphex UI itself by navigating to 'Help' -> 'Documentation (Tutorial)' on the menu bar. <br />
 

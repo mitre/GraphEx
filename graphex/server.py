@@ -158,6 +158,7 @@ class GraphServer:
         ssl_certs_path: typing.Optional[str],
         vault_password: typing.Optional[str],
         inventory: typing.Optional[GraphInventory] = None,
+        log_rollover_amount: int = 20
     ):
         assert isinstance(
             registry, GraphRegistry
@@ -218,7 +219,7 @@ class GraphServer:
         self.running_graphs: typing.Dict[str, RunningGraph] = {}
         """All running graphs on this server (ID mapped to RunningGraph)"""
 
-        self.num_log_files = 20
+        self.num_log_files = log_rollover_amount
         """How many of the last graph runs to save the logs for."""
 
         self.log_dir = os.path.abspath(os.path.join(".", "logs"))
@@ -1282,7 +1283,7 @@ class GraphServer:
             file.write(json.dumps(msgData))
 
         self.log_count = self.getLogCount()
-        if self.log_count > 20:
+        if self.log_count > self.num_log_files:
             files: typing.List[str] = []
             for r, ds, fs in os.walk(self.log_dir):
                 for f in fs:

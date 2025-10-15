@@ -2,6 +2,19 @@
 
 This page was created to track changes to versions of GraphEx. The changelog was created in v1.4 of GraphEx and only changes starting from that version are tracked here.
 
+## 1.16.3
+
+- Added command line argument to control the log rollover amount when serving graphex (-lr or --log_rollover_amount)
+- Updates to the documentation for external URLs, log_rollover_amount, and README.md
+
+## 1.16.2
+
+- Bugfix for 'hanging' behavior experienced when running GraphEx headless in DevOps pipelines due to the terminal width calculation when generating the help menu
+
+## 1.16.1
+
+- Bugfix for the 'About GraphEx' popup modal throwing a package error in the backend
+
 ## 1.16.0
 
 - GraphEx released as open source to the public
