@@ -208,9 +208,6 @@ The author's affiliation with The MITRE Corporation is provided for identificati
 NOTICE
 
 This software was produced for the U. S. Government under Basic Contract and is subject to the Rights in Noncommercial Computer Software and Noncommercia                                                                            l Computer Software Documentation Clause 252.227-7014 (FEB 2014)
-user@ESSP-Agent-Uat-16:~/open-source/GraphEx$ ls
-docs  frontend  graphex  LICENSE  Makefile  MANIFEST.in  pyproject.toml  README.md  setup.py  ssl_certificates
-user@ESSP-Agent-Uat-16:~/open-source/GraphEx$ cat README.md
 ©2025 The MITRE Corporation. ALL RIGHTS RESERVED.
 
 The author's affiliation with The MITRE Corporation is provided for identification purposes only, and is not intended to convey or imply MITRE's concurrence with, or support for, the positions, opinions, or viewpoints expressed by the author.'©2025 The MITRE Corporation. ALL RIGHTS RESERVED.
@@ -270,5 +267,6 @@ python3 -m pip install graphex-esxi-utils graphex-webautomation-plugin
 [Then serve GraphEx](docs/markdown/setup/running.md) and drag the added nodes into your graph to start using them!:
 
 <br/>
+
 
 ![Available subcategories and nodes in the sidebar for the graphex_esxi_utils plugin](https://github.com/mitre/GraphEx-ESXi-Utilities/blob/main/graphex_esxi_utils/docs/markdown/images/vm_categories.png)
