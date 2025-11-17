@@ -80,6 +80,8 @@
 
 		// Get the config values for this file
 		const payloadResponse = await terminalStore.fetchGraphInputData(props.graph, props.filepath || props.name);
+		baseValues.value = payloadResponse['inputs'] ?? {};
+		const secretValues: string[] = payloadResponse['secrets'] ?? [];
 
 		async function addSubBaseValues(inputMetadata: GraphInputMetadata) {
 			if (metadataStore.hasCompositeInput(inputMetadata.datatype)) {
@@ -110,16 +112,14 @@
 				 * In this case, the sshUsername would default to bob. If sshObject composite values was not defined, sshUsername would default to john.
 				 */
 				baseValues.value = { ...subPayloadResponse['inputs'], ...baseValues.value };
-				secretValues.values = { ...subPayloadResponse['secrets'], ...secretValues.values };
+				// TODO: secretValues is a const array, this is probably an error that hasn't been encountered yet:
+				// secretValues.values = { ...subPayloadResponse['secrets'], ...secretValues.values };
 
 				for (const child of compositeData.InputMetadata) {
 					addSubBaseValues(child);
 				}
 			}
 		}
-
-		baseValues.value = payloadResponse['inputs'];
-		const secretValues: string[] = payloadResponse['secrets'];
 
 		//Get subvalues recursively
 		for (const input of props.graph.inputMetadata) {
