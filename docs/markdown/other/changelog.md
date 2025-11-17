@@ -2,6 +2,10 @@
 
 This page was created to track changes to versions of GraphEx. The changelog was created in v1.4 of GraphEx and only changes starting from that version are tracked here.
 
+## 1.16.4
+
+- Bugfix for Graph Input UI menu crashing on Mac
+
 ## 1.16.3
 
 - Added command line argument to control the log rollover amount when serving graphex (-lr or --log_rollover_amount)
