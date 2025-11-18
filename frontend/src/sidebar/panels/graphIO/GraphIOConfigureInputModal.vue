@@ -804,8 +804,8 @@
 			? fileStore.getFilePath(editorStore.activeGraphTab!.fileId)
 			: editorStore.activeGraphTab!.name;
 		const payloadResponse = await terminalStore.fetchGraphInputData(props.graph, pathOrName, true);
-		configFileValues.value = payloadResponse['inputs'];
-		secretValues.value = payloadResponse['secrets'];
+		configFileValues.value = payloadResponse['inputs'] ?? {};
+		secretValues.value = payloadResponse['secrets'] ?? [];
 	}
 
 	onMounted(async () => {
