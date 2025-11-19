@@ -2,6 +2,12 @@
 
 This page was created to track changes to versions of GraphEx. The changelog was created in v1.4 of GraphEx and only changes starting from that version are tracked here.
 
+## 1.17.0
+
+- Updates to node dependencies due to a memory leak in one of the dev dependency modules
+- Updates to tsconfig/tsconfig.node and eslint.configs for newer npm package versions
+- Updates to vue/typescript code to pass new linting requirements
+
 ## 1.16.4
 
 - Bugfix for Graph Input UI menu crashing on Mac

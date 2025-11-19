@@ -28,7 +28,7 @@ class GraphHistory {
 	isRestoringHistory: boolean;
 
 	/** The timeout ID for buffering updates. */
-	updateTimeout?: number;
+	updateTimeout?: ReturnType<typeof setTimeout>;
 
 	/** Backward (undo) history in this graph. The last index will be the most recent operation. */
 	back: Array<HistoryBlock>;
@@ -50,7 +50,9 @@ class GraphHistory {
 	}
 
 	async historyHandlerCallback() {
-		clearTimeout(this.updateTimeout);
+		if (this.updateTimeout) {
+			clearTimeout(this.updateTimeout);
+		}
 		this.updateTimeout = setTimeout(() => {
 			this.updateTimeout = undefined;
 			this.commit();

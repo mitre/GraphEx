@@ -96,7 +96,7 @@ import SearchField from '@/sidebar/nodePanel/SearchField.vue';
 import SearchedNodeComponent from '@/sidebar/nodePanel/SearchedNodeComponent.vue';
 import SearchedFileComponent from '@/sidebar/panels/files/SearchedFileComponent.vue';
 import { useEditorStore, useFileStore, useTerminalStore } from '@/stores';
-import { computed, ref, watch } from 'vue';
+import { computed, ref, watch, onBeforeUnmount } from 'vue';
 
 	export interface globalSearchResult {
 		filePath: string,
@@ -122,7 +122,7 @@ import { computed, ref, watch } from 'vue';
 	const awaitingBackendResult = ref<boolean>(false);
 	const referenceSearch = ref<boolean>(false);
 	const searchMatches = ref<Array<globalSearchResult>>([]);
-	const globalSearchDelayTimeout = ref<number>(-1);
+	const globalSearchDelayTimeout = ref<ReturnType<typeof setTimeout> | null>(null);
 	const selectedFileComponent = ref<number>(-1);
 	/** This is the query as searched by the backend (as opposed to the value typed into the search bar by the user on the frontend) */
 	const globalQuery = ref<string>('');
@@ -340,6 +340,16 @@ import { computed, ref, watch } from 'vue';
 		awaitingBackendResult.value = false;
 	}
 
+	function scheduleGlobalSearch() {
+		if (!searchingGlobally.value) return;
+		if (globalSearchDelayTimeout.value) {
+			clearTimeout(globalSearchDelayTimeout.value);
+		}
+		globalSearchDelayTimeout.value = setTimeout(() => {
+			fetchMatchingFiles();
+		}, 300);
+	}
+
 	const placeholderText = computed(() => {
 		if (searchingGlobally.value) {
 			return "Search Files Globally"
@@ -347,44 +357,9 @@ import { computed, ref, watch } from 'vue';
 		return "Search This Graph"
 	});
 
-	watch(
-		searchInput,
-		() => {
-			if (!searchingGlobally.value) return;
-			if (globalSearchDelayTimeout.value > -1)
-				clearTimeout(globalSearchDelayTimeout.value);
-			globalSearchDelayTimeout.value = setTimeout(() => {
-				fetchMatchingFiles();
-			}, 300);
-		},
-		{ immediate: true }
-	);
-
-	watch(
-		includeExtInput,
-		() => {
-			if (!searchingGlobally.value) return;
-			if (globalSearchDelayTimeout.value > -1)
-				clearTimeout(globalSearchDelayTimeout.value);
-			globalSearchDelayTimeout.value = setTimeout(() => {
-				fetchMatchingFiles();
-			}, 300);
-		},
-		{ immediate: true }
-	);
-
-	watch(
-		excludeExtInput,
-		() => {
-			if (!searchingGlobally.value) return;
-			if (globalSearchDelayTimeout.value > -1)
-				clearTimeout(globalSearchDelayTimeout.value);
-			globalSearchDelayTimeout.value = setTimeout(() => {
-				fetchMatchingFiles();
-			}, 300);
-		},
-		{ immediate: true }
-	);
+	watch(searchInput, scheduleGlobalSearch, { immediate: true });
+	watch(includeExtInput, scheduleGlobalSearch, { immediate: true });
+	watch(excludeExtInput, scheduleGlobalSearch, { immediate: true });
 
 	watch(
 		referenceSearch,
@@ -396,6 +371,12 @@ import { computed, ref, watch } from 'vue';
 		{ immediate: true }
 	)
 
+	onBeforeUnmount(() => {
+		if (globalSearchDelayTimeout.value) {
+			clearTimeout(globalSearchDelayTimeout.value);
+			globalSearchDelayTimeout.value = null;
+		}
+	});
 </script>
 
 <style scoped>
