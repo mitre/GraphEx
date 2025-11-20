@@ -33,7 +33,7 @@ import { computed, onMounted, ref } from 'vue';
 	const VIEWPORT_HEIGHT = 160;
 
 	const iframeEl = ref<HTMLIFrameElement>();
-	const updateTimeout = ref<number | undefined>();
+	const updateTimeout = ref<ReturnType<typeof setTimeout> | undefined>(undefined);
 
 	const scale = ref<number>(1);
 	const anchorX = ref<number>(0);
@@ -112,7 +112,9 @@ import { computed, onMounted, ref } from 'vue';
 	 * This is used to "buffer" updates so that multiple calls in quick succession are batched into a single update.
 	 */
 	function requestUpdateMinimap() {
-		clearTimeout(updateTimeout.value);
+		if (updateTimeout.value) {
+			clearTimeout(updateTimeout.value);
+		}
 		updateTimeout.value = setTimeout(updateMinimap, 250);
 	}
 

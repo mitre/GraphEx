@@ -5,8 +5,8 @@
 </head>
 <body>
 
-<h1 id="installing-graphex">Installing Graphex</h1>
-<p>Graphex is installed via package through Python&#39;s pip package manager (using the CLI (command line interface)). This package can be either downloaded or built from source via our git repository.</p><h2 id="prerequisites">Prerequisites</h2>
+<h1>Installing Graphex</h1>
+<p>Graphex is installed via package through Python&#39;s pip package manager (using the CLI (command line interface)). This package can be either downloaded or built from source via our git repository.</p><h2>Prerequisites</h2>
 <p>The following applications are required to run Graphex:</p><ul>
 <li>Python (version 3.10 or greater) and pip (the python package manager)</li>
 </ul>
@@ -15,7 +15,7 @@
 <li>node (v18.15.0 or greater) and npm (v9.5.0 or greater)</li>
 <li>make</li>
 </ul>
-<p>It is also recommended that you install the application in a python virtual environment (venv). This helps ensure that different python packages (especially ones that may be critical to your system) don&#39;t have conflicts between each other.</p><h2 id="installing-a-released-graphex-version">Installing a Released Graphex Version</h2>
+<p>It is also recommended that you install the application in a python virtual environment (venv). This helps ensure that different python packages (especially ones that may be critical to your system) don&#39;t have conflicts between each other.</p><h2>Installing a Released Graphex Version</h2>
 <p>GraphEx is available via pip: you can simply install the latest graphex package via:</p><pre><code>python3 -m pip install --upgrade pip
 python3 -m pip install mitre-graphex
 </code></pre>
@@ -25,7 +25,7 @@ python3 -m pip install mitre-graphex
 </code></pre>
 <p>Likewise, the web automation plugin can be installed with:</p><pre><code>python3 -m pip install graphex-webautomation-plugin
 </code></pre>
-<p><a href="#installing-plugins">Click here for instructions on installing plugins that aren&#39;t located in the pip feed</a>.</p><p>At this point, &#39;vanilla&#39; Graphex is installed. <a href="running.html">Click here</a> to navigate to instructions on how to run Graphex.</p><h2 id="building-from-source">Building from Source</h2>
+<p><a href="#installing-plugins">Click here for instructions on installing plugins that aren&#39;t located in the pip feed</a>.</p><p>At this point, &#39;vanilla&#39; Graphex is installed. <a href="running.html">Click here</a> to navigate to instructions on how to run Graphex.</p><h2>Building from Source</h2>
 <p>Create a python virtual environment (venv) now if you intend to use one.</p><p>Ensure you have the latest version of pip for python running the following command:</p><pre><code>python3 -m pip install --upgrade pip
 </code></pre>
 <p>You can download this repository using git:</p><pre><code>git clone https://github.com/mitre/GraphEx
@@ -37,7 +37,7 @@ make all
 </code></pre>
 <p>Graphex should now be installed on your system. You can check by running:</p><pre><code>python3 -m pip list
 </code></pre>
-<p>You should see Graphex in the list of packages installed by pip. Unix systems can grep the result for Graphex.</p><p>At this point, &#39;vanilla&#39; Graphex is installed. <a href="running.html">Click here</a> to navigate to instructions on how to run Graphex or <a href="#installing-plugins">continue to the next section for instructions on installing plugins</a>.</p><h3 id="installing-plugins">Installing Plugins</h3>
+<p>You should see Graphex in the list of packages installed by pip. Unix systems can grep the result for Graphex.</p><p>At this point, &#39;vanilla&#39; Graphex is installed. <a href="running.html">Click here</a> to navigate to instructions on how to run Graphex or <a href="#installing-plugins">continue to the next section for instructions on installing plugins</a>.</p><h3>Installing Plugins</h3>
 <p>Plugins for Graphex are installed as standalone python packages. Each plugin will have its own pip (python package) dependencies that will need to be installed before the package itself can be installed. The process to install a plugin is functionally identical to the process you just followed to install Graphex.</p><p>As an example, there is a ESXi Utilities package available for graphex.</p><p>You would clone the repository (in the same way you cloned the Graphex application):</p><pre><code>git clone https://github.com/mitre/GraphEx-ESXi-Utilities
 </code></pre>
 <p>Navigate into the folder retrieved from the server. Install the python package dependencies for the plugin by running the following command (it may error):</p><pre><code>python3 setup.py install
@@ -46,13 +46,13 @@ make all
 </code></pre>
 <p>The plugin for Graphex should now be installed on your system. You can check by running:</p><pre><code>python3 -m pip list
 </code></pre>
-<p>You should see both Graphex and the plugin&#39;s package name in the list of packages installed by pip. Unix systems can grep the results.</p><p>When you are done installing all your plugins, <a href="running.html">click here</a> to navigate to instructions on how to run Graphex.</p><h2 id="updating-graphex">Updating Graphex</h2>
-<p>Graphex and its plugins are python (pip) packages. They can be upgraded in the same manner as any other python package.</p><h3 id="updating-install-from-a-pip-feed">Updating Install from a Pip Feed</h3>
+<p>You should see both Graphex and the plugin&#39;s package name in the list of packages installed by pip. Unix systems can grep the results.</p><p>When you are done installing all your plugins, <a href="running.html">click here</a> to navigate to instructions on how to run Graphex.</p><h2>Updating Graphex</h2>
+<p>Graphex and its plugins are python (pip) packages. They can be upgraded in the same manner as any other python package.</p><h3>Updating Install from a Pip Feed</h3>
 <p>Any packages installed from the feed can be upgraded through pip:</p><pre><code>python3 -m pip install --upgrade graphex
 # or, plugin example
 python3 -m pip install --upgrade plugin_name
 </code></pre>
-<h3 id="updating-built-from-source">Updating Built from Source</h3>
+<h3>Updating Built from Source</h3>
 <p>Any packages installed from a repository have to be re-built. First you will &#39;pull down&#39; changes from the remote repository and then you will perform a fresh build and install of the package.</p><p>Navigate to the directory/folder of the package you want to upgrade (i.e. Graphex itself or any of its plugins)</p><p>First, figure out what &#39;git branch&#39; you are currently on:</p><pre><code>git branch --show-current
 </code></pre>
 <p>Typically it is called &#39;main&#39;, &#39;master&#39;, or &#39;release/v#&#39;. If it isn&#39;t one of these, you are probably on a branch for development (one that may not be complete or has untested changes). Confirm that is what you want before continuing.</p><p>If you have modified the files in this branch in any way, it may interfere with the following steps. This document is going to assume you have not changed any of the files in the folder (if you have changed the files on accident, you can always clone the repo again in a new folder to avoid conflicting with the changes in the current folder).</p><p>You can check for changes to the current git directory by running:</p><pre><code>git status -s

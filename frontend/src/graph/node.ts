@@ -177,7 +177,7 @@ class GraphNode {
 	cachedHeight: number | null = null;
 
 	/** Timeout referenced used for buffering this node's refresh. */
-	refreshTimeout?: number;
+	refreshTimeout?: ReturnType<typeof setTimeout>;
 
 	/** Dependencies gathered from this node's last refresh. This is used to skip refreshing this node when a refresh is not needed. */
 	lastRefreshedDependencies: string;
@@ -497,7 +497,9 @@ class GraphNode {
 		}
 
 		this.refreshTimeout = setTimeout(async () => {
-			clearTimeout(this.refreshTimeout);
+			if (this.refreshTimeout) {
+				clearTimeout(this.refreshTimeout);
+			}
 			if (!this.forceRefresh && this.lastRefreshedDependencies === this.getRefreshDependencies()) {
 				// Skip a refresh when the last state is the same as the current state
 				// This is used to prevent a refresh from triggering another refresh unnecessarily

@@ -93,7 +93,7 @@ class GraphEditorUI {
 	translating: boolean;
 
 	/** For keeping track of the currently executing 'interval' while scrolling / translating the 'camera' (offset variables) */
-	translatingInterval: number | null;
+	translatingInterval: ReturnType<typeof setInterval> | null = null;
 
 	/** Whether the editor is currently in a scaling transition. */
 	isScaling: boolean;
@@ -549,11 +549,10 @@ class GraphEditorUI {
 				else this.offsets.y += yStep;
 				travelledY += yStep;
 			}
-			if (clear) {
-				if (this.translatingInterval) {
-					clearInterval(this.translatingInterval);
-					this.translating = false;
-				}
+			if (clear && this.translatingInterval !== null) {
+				clearInterval(this.translatingInterval);
+				this.translatingInterval = null;
+				this.translating = false;
 			}
 		}, transitionTime / tranistionStep);
 	}
