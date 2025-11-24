@@ -205,10 +205,11 @@ class GraphServer:
 
         socketio = SocketIO(
             app,
+            async_mode="eventlet",
             path="/api/socket.io",
             cors_allowed_origins="*",
             logger=False,
-            engineio_logger=False,
+            engineio_logger=False
         )
         self.socketio = socketio
         """The framework for Flask socket support"""
@@ -887,7 +888,13 @@ class GraphServer:
         :param port: The port of the webserver.
         """
         print(f"GraphEx server starting on all network interfaces at port: {port}")
-        self.socketio.run(app=self.app, host="0.0.0.0", port=port, allow_unsafe_werkzeug=True, ssl_context=self.ssl_context, debug=False)  # type: ignore
+        self.socketio.run(
+            app=self.app,
+            host="0.0.0.0",
+            port=port,
+            ssl_context=self.ssl_context,
+            debug=False
+        )
 
     #####
     # Static methods that return (error message, int status code) for various situations

@@ -2,6 +2,13 @@
 
 This page was created to track changes to versions of GraphEx. The changelog was created in v1.4 of GraphEx and only changes starting from that version are tracked here.
 
+## 1.18.0
+
+- Replaces unsafe_werkzeug default flask backend with eventlet for socketIO backend server
+- Pins pkg_resources module to (less than) version 81 to avoid possible removal on November 30, 2025
+- Adds metadata to pip package to be displayed in PyPI
+- Removes build and wheel as package dependencies for the application itself
+
 ## 1.17.0
 
 - Updates to node dependencies due to a memory leak in one of the dev dependency modules
