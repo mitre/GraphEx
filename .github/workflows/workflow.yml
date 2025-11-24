@@ -18,6 +18,7 @@ jobs:
       id-token: write
     steps:
       - uses: actions/checkout@v4
+
       - uses: actions/setup-python@v5
         with:
           python-version: '3.10'
@@ -27,6 +28,23 @@ jobs:
 
       - name: Build package
         run: make build
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Run sha1hulud scanner against repo
+        run: |
+          set -e
+          git clone https://github.com/mottibec/sha1hulud-scanner.git
+          cd sha1hulud-scanner
+          echo "Scanning: $GITHUB_WORKSPACE"
+          node bin/sha1hulud-scanner.js "$GITHUB_WORKSPACE" --verbose | tee ../sha1hulud_scan_output.txt
+          cd ..
+          if grep -qE 'CRITICAL ISSUES|CONFIRMED MALICIOUS|CRITICAL' sha1hulud_scan_output.txt; then
+            echo "sha1hulud scanner detected vulnerabilities. Failing the build."
+            exit 1
+          fi
 
       # the package name must match between setup.py and pypi
       - name: Publish package
