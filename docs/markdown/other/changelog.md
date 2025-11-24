@@ -2,6 +2,10 @@
 
 This page was created to track changes to versions of GraphEx. The changelog was created in v1.4 of GraphEx and only changes starting from that version are tracked here.
 
+## 1.17.1
+
+- Pin npm package versions to suspected safe ones due to Shai Hulud supply chain compromise
+
 ## 1.17.0
 
 - Updates to node dependencies due to a memory leak in one of the dev dependency modules
