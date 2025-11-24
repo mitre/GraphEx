@@ -1,3 +1,6 @@
+import eventlet
+eventlet.monkey_patch()
+
 import base64
 import gzip
 import importlib.resources as pkg_resources
@@ -888,11 +891,13 @@ class GraphServer:
         :param port: The port of the webserver.
         """
         print(f"GraphEx server starting on all network interfaces at port: {port}")
+        cert_path, key_path = handle_ssl_context(self.ssl_context)
         self.socketio.run(
             app=self.app,
             host="0.0.0.0",
             port=port,
-            ssl_context=self.ssl_context,
+            certfile=cert_path,
+            keyfile=key_path,
             debug=False
         )
 
