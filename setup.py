@@ -42,7 +42,6 @@ setup(
         "Intended Audience :: Developers",
         "Topic :: Software Development :: Build Tools",
         "Framework :: Flask",
-        "License :: OSI Approved :: Apache Software License",
         "Programming Language :: Python :: 3",
         "Programming Language :: Python :: 3 :: Only",
         "Programming Language :: Python :: 3.10",
@@ -115,7 +114,6 @@ setup(
             "pyasn1==0.6.1",
             "pyasn1_modules==0.4.2",
             # end service_identity deps
-        "setuptools==80.9.0",
         "typeguard==4.4.4",
         "typing_extensions==4.15.0",
     ],
