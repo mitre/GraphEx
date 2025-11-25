@@ -27,4 +27,4 @@ jobs:
           git clone https://github.com/t-ambur/sha1-hulud-scanner
           cd sha1-hulud-scanner
           chmod +x sha1-hulud-scanner.sh
-          ./sha1-hulud-scanner.sh "$GITHUB_WORKSPACE/graphex/frontend/"
+          ./sha1-hulud-scanner.sh "$GITHUB_WORKSPACE/frontend/"
