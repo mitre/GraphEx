@@ -8,6 +8,9 @@ This page was created to track changes to versions of GraphEx. The changelog was
 - Pins pkg_resources module to (less than) version 81 to avoid possible removal on November 30, 2025
 - Adds metadata to pip package to be displayed in PyPI
 - Removes build and wheel as package dependencies for the application itself
+## 1.17.1
+
+- Pin npm package versions to suspected safe ones due to Shai Hulud supply chain compromise
 
 ## 1.17.0
 
