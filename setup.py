@@ -22,7 +22,7 @@ def read_readme():
 
 setup(
     name="mitre-graphex",
-    version="1.18.0",
+    version="2.0.0",
     author="The MITRE Corporation",
     description="Visual programming tool for environment automation.",
     long_description=read_readme(),

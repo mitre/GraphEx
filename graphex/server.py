@@ -891,7 +891,7 @@ class GraphServer:
         :param port: The port of the webserver.
         """
         print(f"GraphEx server starting on all network interfaces at port: {port}")
-        cert_path, key_path = handle_ssl_context(self.ssl_context)
+        cert_path, key_path = self.ssl_context
         self.socketio.run(
             app=self.app,
             host="0.0.0.0",
