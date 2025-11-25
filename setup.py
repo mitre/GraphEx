@@ -101,7 +101,7 @@ setup(
         "pyopenssl==25.3.0",
         "python-dateutil==2.8.2",
         "pyyaml==6.0.3",
-        "requests==2.32.3",
+        "requests==2.32.5",
             ## start requests deps
             "certifi==2025.11.12",
             "charset-normalizer==3.4.4",
