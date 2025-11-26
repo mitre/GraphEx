@@ -22,7 +22,7 @@ def read_readme():
 
 setup(
     name="mitre-graphex",
-    version="2.0.0",
+    version="1.18.0",
     author="The MITRE Corporation",
     description="Visual programming tool for environment automation.",
     long_description=read_readme(),
@@ -58,11 +58,6 @@ setup(
             "cffi==2.0.0",
             "pycparser==2.23",
             # end cryptography deps
-        "eventlet==0.40.3",
-            # start eventlet dep
-            "dnspython==2.8.0",
-            "greenlet==3.0.3",
-            # end eventlet deps
         "flask-socketio==5.5.1",
             ## start flask-socketio deps
             "bidict==0.23.1",

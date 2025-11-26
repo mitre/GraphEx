@@ -203,22 +203,12 @@ class GraphServer:
 
         logging.getLogger("werkzeug").setLevel(logging.WARNING)
 
-        # Create loggers for socketio and engineio and set to WARNING
-        socketio_logger = logging.getLogger("socketio")
-        engineio_logger = logging.getLogger("engineio")
-        socketio_logger.setLevel(logging.WARNING)
-        engineio_logger.setLevel(logging.WARNING)
-
-        self.eventlet_access_logging: bool = False
-        self.flask_debug_logging: bool = False
-
         socketio = SocketIO(
             app,
-            async_mode="eventlet",
             path="/api/socket.io",
             cors_allowed_origins="*",
-            logger=socketio_logger,
-            engineio_logger=engineio_logger
+            logger=False,
+            engineio_logger=False,
         )
         self.socketio = socketio
         """The framework for Flask socket support"""
@@ -896,21 +886,8 @@ class GraphServer:
 
         :param port: The port of the webserver.
         """
-        # Disable Eventlet DNS patching to avoid SSL EOF issues
-        os.environ["EVENTLET_NO_GREENDNS"] = "1"
-        import eventlet
-
         print(f"GraphEx server starting on all network interfaces at port: {port}")
-        cert_path, key_path = self.ssl_context
-        self.socketio.run(
-            app=self.app,
-            host="0.0.0.0",
-            port=port,
-            certfile=cert_path,
-            keyfile=key_path,
-            debug=self.flask_debug_logging,
-            log_output=self.eventlet_access_logging
-        )
+        self.socketio.run(app=self.app, host="0.0.0.0", port=port, allow_unsafe_werkzeug=True, ssl_context=self.ssl_context, debug=False)  # type: ignore
 
     #####
     # Static methods that return (error message, int status code) for various situations

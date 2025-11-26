@@ -4,23 +4,8 @@ import shutil
 import sys
 import typing
 from dataclasses import dataclass
-
-from graphex import (
-    FILE_EXTENSION,
-    Graph,
-    GraphConfig,
-    GraphexLogger,
-    GraphRegistry,
-    GraphRuntime,
-    GraphServer,
-    vault,
-    GraphInputValueMetadata,
-    GraphInventory
-)
-
-from cryptography.fernet import InvalidToken
-from getpass import getpass
-
+# Do not add more imports here, add them halfway down this file after parsing the CLI arguments
+# See the comment called 'Handle Imports'
 
 @dataclass
 class Argument:
@@ -280,6 +265,7 @@ def print_help_and_exit(
     :param graph_inputs: Graph inputs available to this help menu.
     :param errors: Error messages to print alongside this help menu.
     """
+    from graphex import (GraphInputValueMetadata, GraphRegistry, FILE_EXTENSION)
 
     def process_composite(input: GraphInputValueMetadata) -> typing.Union[str, dict]:
 
@@ -739,6 +725,37 @@ DEFAULT_CONFIG_FILEPATH = os.path.join(
 
 # Get the mode
 MODE = args.pop(0)
+
+#########################
+# Handle Imports
+#########################
+
+# Handle eventlet and monkey patching
+if MODE == "serve":
+    # Disable greendns to avoid SSL EOF issues
+    os.environ["EVENTLET_NO_GREENDNS"] = "1"
+    # Monkey patch as early as possible
+    import eventlet
+    eventlet.monkey_patch()
+
+# The rest of the imports
+from cryptography.fernet import InvalidToken
+from getpass import getpass
+from graphex import (
+    Graph,
+    GraphConfig,
+    GraphexLogger,
+    GraphRegistry,
+    GraphRuntime,
+    GraphServer,
+    vault,
+    GraphInputValueMetadata,
+    GraphInventory
+)
+
+#########################
+# Handle Modes
+#########################
 
 # Handle serve
 if MODE == "serve":
