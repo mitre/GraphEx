@@ -898,9 +898,7 @@ class GraphServer:
         """
         # Disable Eventlet DNS patching to avoid SSL EOF issues
         os.environ["EVENTLET_NO_GREENDNS"] = "1"
-        # eventlet+moneky_patch should be imported/applied here to avoid it applying to subprocesses
         import eventlet
-        eventlet.monkey_patch()
 
         print(f"GraphEx server starting on all network interfaces at port: {port}")
         cert_path, key_path = self.ssl_context
