@@ -206,13 +206,22 @@ class GraphServer:
 
         logging.getLogger("werkzeug").setLevel(logging.WARNING)
 
+        # Create loggers for socketio and engineio and set to WARNING
+        socketio_logger = logging.getLogger("socketio")
+        engineio_logger = logging.getLogger("engineio")
+        socketio_logger.setLevel(logging.WARNING)
+        engineio_logger.setLevel(logging.WARNING)
+
+        self.eventlet_access_logging: bool = False
+        self.flask_debug_logging: bool = False
+
         socketio = SocketIO(
             app,
             async_mode="eventlet",
             path="/api/socket.io",
             cors_allowed_origins="*",
-            logger=False,
-            engineio_logger=False
+            logger=socketio_logger,
+            engineio_logger=engineio_logger
         )
         self.socketio = socketio
         """The framework for Flask socket support"""
@@ -898,7 +907,8 @@ class GraphServer:
             port=port,
             certfile=cert_path,
             keyfile=key_path,
-            debug=False
+            debug=self.flask_debug_logging,
+            log_output=self.eventlet_access_logging
         )
 
     #####
