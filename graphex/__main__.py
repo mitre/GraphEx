@@ -1,26 +1,9 @@
 import os
-import re
-import shutil
 import sys
 import typing
 from dataclasses import dataclass
-
-from graphex import (
-    FILE_EXTENSION,
-    Graph,
-    GraphConfig,
-    GraphexLogger,
-    GraphRegistry,
-    GraphRuntime,
-    GraphServer,
-    vault,
-    GraphInputValueMetadata,
-    GraphInventory
-)
-
-from cryptography.fernet import InvalidToken
-from getpass import getpass
-
+# Imports should be farther down this file as needed and not at the top of the file
+# Failure to comply may break the gevent monkey patching
 
 @dataclass
 class Argument:
@@ -170,6 +153,7 @@ def get_terminal_width(default: int = 120, max_width: int = 240) -> int:
     Return a terminal width that is safe to use in headless/non-TTY environments.
     Clamps to a sensible range to avoid excessively large widths from environment variables.
     """
+    import shutil
     try:
         if sys.stdout.isatty():
             width = shutil.get_terminal_size(fallback=(default, 24)).columns
@@ -189,6 +173,7 @@ def fit_text_to_width(text: str, width: int) -> typing.List[str]:
 
     :returns: A list of strings such that each string is a line of text that fits the given width.
     """
+    import re
     lines = []
     line = ""
 
@@ -280,6 +265,7 @@ def print_help_and_exit(
     :param graph_inputs: Graph inputs available to this help menu.
     :param errors: Error messages to print alongside this help menu.
     """
+    from graphex import ( FILE_EXTENSION, GraphInputValueMetadata, GraphRegistry )
 
     def process_composite(input: GraphInputValueMetadata) -> typing.Union[str, dict]:
 
@@ -697,6 +683,7 @@ def decrypt_vault_password_prompt(
     :raises Exception: when the number of retries is exceeded for password input
     :returns: a tuple of: (the decrypted string, the password used to decrypt the string)
     """
+    from getpass import getpass
     attempts = 0
     max_attempts = 3
     msg = (
@@ -740,6 +727,28 @@ DEFAULT_CONFIG_FILEPATH = os.path.join(
 # Get the mode
 MODE = args.pop(0)
 
+#########################
+# Imports
+#########################
+
+# Monkey patching should be applied as early as possible
+if MODE == "serve":
+    from gevent import monkey
+    monkey.patch_all()
+
+# Now import third-party and graphex modules
+from cryptography.fernet import InvalidToken #type:ignore
+from graphex import (
+    GraphConfig,
+    GraphRegistry,
+    vault,
+    GraphInventory
+)
+
+#########################
+# Modes
+#########################
+
 # Handle serve
 if MODE == "serve":
     SERVE_ARGUMENTS = [
@@ -757,6 +766,11 @@ if MODE == "serve":
     errors, args = load_arguments(SERVE_ARGUMENTS, args)
     if len(args) > 0:
         errors.append(f"Unrecognized/extraneous values: {str(args)[1:-1]}")
+
+    import re
+    from graphex import (
+        GraphServer
+    )
 
     # Load the config
     config: typing.Optional[GraphConfig] = None
@@ -926,6 +940,13 @@ if MODE == "run":
         INVENTORY
     ]
     errors, args = load_arguments(RUN_ARGUMENTS, args)
+
+    from graphex import (
+        Graph,
+        GraphexLogger,
+        GraphRuntime,
+        GraphInputValueMetadata
+    )
 
     # Load the config
     config: typing.Optional[GraphConfig] = None
@@ -1299,6 +1320,8 @@ if MODE == "vault":
 
     if HELP.value:
         print_help_and_exit(mode=MODE, args=VAULT_ARGUMENTS, graph_inputs=[], errors=[])
+
+    from getpass import getpass
 
     ## handle user input verification
     if not ENCRYPT.value and not DECRYPT.value and not REMOVE.value:

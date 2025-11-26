@@ -202,13 +202,19 @@ class GraphServer:
         """The Flask server."""
 
         logging.getLogger("werkzeug").setLevel(logging.WARNING)
+        socketio_logger = logging.getLogger("socketio")
+        engineio_logger = logging.getLogger("engineio")
+        socketio_logger.setLevel(logging.WARNING)
+        engineio_logger.setLevel(logging.WARNING)
 
+        # Use gevent async mode for WebSockets
         socketio = SocketIO(
             app,
+            async_mode="gevent",
             path="/api/socket.io",
             cors_allowed_origins="*",
-            logger=False,
-            engineio_logger=False,
+            logger=socketio_logger,
+            engineio_logger=engineio_logger
         )
         self.socketio = socketio
         """The framework for Flask socket support"""
@@ -887,7 +893,16 @@ class GraphServer:
         :param port: The port of the webserver.
         """
         print(f"GraphEx server starting on all network interfaces at port: {port}")
-        self.socketio.run(app=self.app, host="0.0.0.0", port=port, allow_unsafe_werkzeug=True, ssl_context=self.ssl_context, debug=False)  # type: ignore
+        cert_path, key_path = self.ssl_context
+        # socketio.run will use gevent when installed
+        self.socketio.run(
+            app=self.app,
+            host="0.0.0.0",
+            port=port,
+            certfile=cert_path,
+            keyfile=key_path,
+            debug=False # this arg is for flask dev server debugging
+        )
 
     #####
     # Static methods that return (error message, int status code) for various situations

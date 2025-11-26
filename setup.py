@@ -74,6 +74,11 @@ setup(
             "Werkzeug==3.1.3",
             "wsproto==1.3.2",
             # end flask-socketio deps
+        "gevent==25.9.1",
+            ## start gevent deps
+            "greenlet==3.2.4",
+            "zope.event==6.1",
+            "zope.interface==8.1.1",
         "gitPython==3.1.45",
             ## start gitPython deps
             "gitdb==4.0.12",
