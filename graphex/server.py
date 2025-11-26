@@ -1,6 +1,3 @@
-import eventlet
-eventlet.monkey_patch()
-
 import base64
 import gzip
 import importlib.resources as pkg_resources
@@ -899,6 +896,13 @@ class GraphServer:
 
         :param port: The port of the webserver.
         """
+        # Disable Eventlet DNS patching to avoid SSL EOF issues
+        os.environ["EVENTLET_NO_GREENDNS"] = "1"
+
+        import eventlet
+        # Patch only what the server needs; leave dns unpatched
+        eventlet.monkey_patch(dns=False)
+
         print(f"GraphEx server starting on all network interfaces at port: {port}")
         cert_path, key_path = self.ssl_context
         self.socketio.run(
