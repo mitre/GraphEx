@@ -2,9 +2,16 @@
 
 This page was created to track changes to versions of GraphEx. The changelog was created in v1.4 of GraphEx and only changes starting from that version are tracked here.
 
+## 1.18.0
+
+- Pins all used pip module dependencies to current versions
+- Pins setuptools version for package build
+- Adds metadata to pip package to be displayed in PyPI
+- Removes build and wheel as package dependencies for the application itself
+
 ## 1.17.1
 
-- Pin npm package versions to suspected safe ones due to Shai Hulud supply chain compromise
+- Pin npm package versions to suspected safe ones due to Sha1-Hulud supply chain compromise
 
 ## 1.17.0
 

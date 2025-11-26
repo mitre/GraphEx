@@ -1,21 +1,15 @@
-name: Release Workflow
+name: PR Validation Workflow
+permissions:
+  contents: read
 
 on:
   pull_request:
     branches:
       - main
-    types:
-      - closed
 
 jobs:
-  publish:
-    if: github.event.pull_request.merged == true
+  validate:
     runs-on: ubuntu-latest
-    environment: release
-    # this permission is required for PyPI Trusted Publisher setup
-    # https://docs.pypi.org/trusted-publishers/using-a-publisher/
-    permissions:
-      id-token: write
     steps:
       - uses: actions/checkout@v4
 
@@ -36,7 +30,3 @@ jobs:
           cd sha1-hulud-scanner
           chmod +x sha1-hulud-scanner.sh
           ./sha1-hulud-scanner.sh "$GITHUB_WORKSPACE/frontend/"
-
-      # the package name must match between setup.py and pypi
-      - name: Publish package
-        uses: pypa/gh-action-pypi-publish@release/v1
