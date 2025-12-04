@@ -22,7 +22,7 @@ def read_readme():
 
 setup(
     name="mitre-graphex",
-    version="1.18.0",
+    version="2.0.0",
     author="The MITRE Corporation",
     description="Visual programming tool for environment automation.",
     long_description=read_readme(),
@@ -79,6 +79,7 @@ setup(
             "greenlet==3.2.4",
             "zope.event==6.1",
             "zope.interface==8.1.1",
+            # end gevent deps
         "gitPython==3.1.45",
             ## start gitPython deps
             "gitdb==4.0.12",

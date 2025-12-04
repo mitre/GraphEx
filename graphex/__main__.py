@@ -2,8 +2,7 @@ import os
 import sys
 import typing
 from dataclasses import dataclass
-# Imports should be farther down this file as needed and not at the top of the file
-# Failure to comply may break the gevent monkey patching
+# More imports are farther down this file as needed and not at the top of the file
 
 @dataclass
 class Argument:
@@ -730,11 +729,6 @@ MODE = args.pop(0)
 #########################
 # Imports
 #########################
-
-# Monkey patching should be applied as early as possible
-if MODE == "serve":
-    from gevent import monkey
-    monkey.patch_all()
 
 # Now import third-party and graphex modules
 from cryptography.fernet import InvalidToken #type:ignore

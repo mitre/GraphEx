@@ -1,3 +1,9 @@
+### ### ### ### ###
+# Monkey patching should be applied as early as possible
+from gevent import monkey
+monkey.patch_all()
+### ### ### ### ###
+
 from graphex.graph import Graph
 from graphex.registry import GraphRegistry
 from graphex.runtime import Runtime, GraphRuntime, ForkedThreadRuntime, NodeRuntimeError

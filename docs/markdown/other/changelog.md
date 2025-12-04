@@ -2,6 +2,10 @@
 
 This page was created to track changes to versions of GraphEx. The changelog was created in v1.4 of GraphEx and only changes starting from that version are tracked here.
 
+## 2.0.0
+
+- Replaces threaded development backend with greenlet based gevent as the production backend server
+
 ## 1.18.0
 
 - Pins all used pip module dependencies to current versions
