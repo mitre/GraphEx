@@ -80,6 +80,7 @@ setup(
             "zope.event==6.1",
             "zope.interface==8.1.1",
             # end gevent deps
+        "gevent-websocket==0.10.1",
         "gitPython==3.1.45",
             ## start gitPython deps
             "gitdb==4.0.12",
