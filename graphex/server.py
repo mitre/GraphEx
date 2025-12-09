@@ -204,8 +204,8 @@ class GraphServer:
         logging.getLogger("werkzeug").setLevel(logging.WARNING)
         socketio_logger = logging.getLogger("socketio")
         engineio_logger = logging.getLogger("engineio")
-        socketio_logger.setLevel(logging.WARNING)
-        engineio_logger.setLevel(logging.WARNING)
+        socketio_logger.setLevel(logging.DEBUG)
+        engineio_logger.setLevel(logging.DEBUG)
 
         # Use gevent async mode for WebSockets
         socketio = SocketIO(
@@ -1112,16 +1112,18 @@ class GraphServer:
         # If something goes wrong during join, make sure we end the process
         # We inform the clients that we are attempting to cleanup the process
 
-        # print(f"Cleaning up process for execution context: {context_id}")
+        print(f"Cleaning up process for execution context: {context_id}", flush=True)
         if process.is_alive():
             time.sleep(0.9)
             process.join(timeout=10)
         if process.is_alive():
+            print("Process is still alive, attempting terminate...", flush=True)
             process.terminate()
             time.sleep(0.1)
             process.join()
             time.sleep(1.9)
         if process.is_alive():
+            print("Process is still alive, attempting kill...", flush=True)
             process.kill()
             time.sleep(0.1)
             process.join()
@@ -1131,7 +1133,7 @@ class GraphServer:
         process.close()
         running_graph["finished"] = True
 
-        # print(f"Finished execution context: {context_id} (exit code {exit_code})")
+        print(f"Finished execution context: {context_id}", flush=True)
 
         # save this run to the logs
         self.saveOutputToFile(graph_name, running_graph["history"])
