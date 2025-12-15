@@ -1115,17 +1115,20 @@ class GraphServer:
         print(f"Cleaning up process for execution context: {context_id}", flush=True)
         if process.is_alive():
             time.sleep(0.9)
+            print("Process is alive (1), attempting join (1)...", flush=True)
             process.join(timeout=10)
         if process.is_alive():
-            print("Process is still alive, attempting terminate...", flush=True)
+            print("Process is still alive (2), attempting terminate...", flush=True)
             process.terminate()
             time.sleep(0.1)
+            print("attempting join again (2)...", flush=True)
             process.join()
             time.sleep(1.9)
         if process.is_alive():
-            print("Process is still alive, attempting kill...", flush=True)
+            print("Process is still alive (3), attempting kill...", flush=True)
             process.kill()
             time.sleep(0.1)
+            print("attempting join again (3)...", flush=True)
             process.join()
             time.sleep(1.9)
 
