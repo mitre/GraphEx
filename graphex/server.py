@@ -1104,7 +1104,7 @@ class GraphServer:
             return
 
         # save the exitcode to a local variable for printing a little farther down
-        # exit_code = process.exitcode
+        exit_code = process.exitcode
 
         # buffer to give the process time to exit safely
         time.sleep(0.1)
@@ -1133,7 +1133,7 @@ class GraphServer:
         process.close()
         running_graph["finished"] = True
 
-        print(f"Finished execution context: {context_id}", flush=True)
+        print(f"Finished execution context: {context_id} (exit_code {exit_code})", flush=True)
 
         # save this run to the logs
         self.saveOutputToFile(graph_name, running_graph["history"])
