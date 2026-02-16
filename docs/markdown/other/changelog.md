@@ -2,6 +2,10 @@
 
 This page was created to track changes to versions of GraphEx. The changelog was created in v1.4 of GraphEx and only changes starting from that version are tracked here.
 
+## 1.8.1
+
+- Adds "setuptools==80.9.0" as a pip package dependency to enable usage of 'pkg_resources' module before deprecation
+
 ## 1.18.0
 
 - Pins all used pip module dependencies to current versions

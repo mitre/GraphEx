@@ -22,7 +22,7 @@ def read_readme():
 
 setup(
     name="mitre-graphex",
-    version="1.18.0",
+    version="1.18.1",
     author="The MITRE Corporation",
     description="Visual programming tool for environment automation.",
     long_description=read_readme(),
@@ -103,6 +103,8 @@ setup(
             "idna==3.11",
             "urllib3==2.5.0",
             # end requests deps
+        # Needed due to deprecation of pkg_resources usage
+        "setuptools==80.9.0",
         "service_identity==24.2.0",
             ## start service_identity deps
             "attrs==25.4.0",
