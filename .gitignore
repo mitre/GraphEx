@@ -4,6 +4,7 @@ frontend/package-lock.json
 test.png
 *.gx
 graphex/docs/html/plugin_docs/*.html
+graphex_ssl_certificates
 
 # Logs
 logs
