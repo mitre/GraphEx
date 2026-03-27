@@ -949,7 +949,7 @@ class NamedFormatString(Node):
 
             s = s[0:start] + str(found_socket.get_value(self)) + s[end:]
 
-        self.result = s.replace('\{', '{').replace('\}', '}')
+        self.result = s.replace(r"\{", "{").replace(r"\}", "}")
 
     @classmethod
     def dynamic_attributes(cls, graph: Graph, instance_metadata: NodeMetadata) -> NodeDynamicAttributes:
