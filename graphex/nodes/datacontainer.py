@@ -875,7 +875,7 @@ class DataContainerFormatString(Node):
 
     def run(self):
         current = self.base
-        sub_regex = re.compile(r"\{\s*data:([^\}]+)\s*\}", flags=re.IGNORECASE)  # For matching the template as a whole
+        sub_regex = re.compile(r"\{\s*data:([^}]+)\s*\}", flags=re.IGNORECASE)  # For matching the template as a whole
         match = None
         while match := sub_regex.search(current):
             if not match:
