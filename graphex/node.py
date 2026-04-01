@@ -445,7 +445,7 @@ class Node(abc.ABC):
     def log(self, msg: str, level: str = "INFO", skip_printing_level: bool = False):
         msg_to_write = self.log_prefix() + msg
         # Don't print detected as purely whitespace (including whitespace characters)
-        if not re.search("^\s*$", msg_to_write):
+        if not re.search(r"^\s*$", msg_to_write):
             self.logger.write(msg_to_write, level=level.strip().upper(), skip_printing_level=skip_printing_level)
 
     def debug(self, msg: str):

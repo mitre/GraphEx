@@ -542,7 +542,7 @@ def load_graph_inputs(
         Remove commas, split, add individual values.
         Regex will ignore commas escaped with two backslashes and then a comma
         """
-        return re.sub(r"(?<!\\),", " ", s).replace("\,", ",").split()  # type: ignore
+        return re.sub(r"(?<!\\),", " ", s).replace(r"\,", ",").split()
 
     while cli_values:
         current = cli_values.pop(0)
