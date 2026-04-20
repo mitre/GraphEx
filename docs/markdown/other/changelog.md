@@ -2,6 +2,11 @@
 
 This page was created to track changes to versions of GraphEx. The changelog was created in v1.4 of GraphEx and only changes starting from that version are tracked here.
 
+## 1.8.3
+
+- Updates the pinned version of the requests pip module dependency for compatability with Python-ESXi-Utilities library
+    - Unpins the dependencies of 'requests'
+
 ## 1.8.2
 
 - Corrects raw regex string warnings
